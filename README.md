@@ -13,5 +13,4 @@
 #### Green Bonds Stat:
   Green_Bonds.csv : https://climatedata.imf.org/pages/fi-indicators#fr1
 
-#FEITE FOLK:
-https://nypost.com/2016/02/02/worlds-fattest-man-loved-energy-drinks-not-wisely-but-too-well/
+
