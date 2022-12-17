@@ -489,10 +489,7 @@
             <column caption='Year' datatype='integer' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
-            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
-              <groupfilter function='member' level='[country]' member='&quot;Bosnia and Herzegovina&quot;' />
-              <groupfilter function='member' level='[country]' member='&quot;Bulgaria&quot;' />
-            </groupfilter>
+            <groupfilter function='member' level='[country]' member='&quot;Italy&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
@@ -519,7 +516,7 @@
             <format attr='fill-above' id='refline1' value='#00000000' />
             <format attr='fill-below' id='refline1' value='#00000000' />
             <format attr='line-visibility' value='on' />
-            <format attr='line-pattern-only' value='dashed' />
+            <format attr='line-pattern-only' value='solid' />
           </style-rule>
           <style-rule element='gridline'>
             <format attr='line-visibility' value='on' />
@@ -556,6 +553,7 @@
             <style>
               <style-rule element='mark'>
                 <format attr='mark-markers-mode' value='auto' />
+                <format attr='mark-transparency' value='52' />
               </style-rule>
             </style>
           </pane>
