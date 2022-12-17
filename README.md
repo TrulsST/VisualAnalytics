@@ -10,6 +10,8 @@
   https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG
 #### EV - Charging Points:
   IEA-EV-dataEV charging pointsHistorical.csv : https://www.iea.org/data-and-statistics/data-tools/global-ev-data-explorer
+#### Energy RD&D budgets
+https://www.iea.org/data-and-statistics/data-product/energy-technology-rd-and-d-budget-database-2#documentation
 #### Green Bonds Stat:
   Green_Bonds.csv : https://climatedata.imf.org/pages/fi-indicators#fr1
 
