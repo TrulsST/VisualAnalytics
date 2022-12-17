@@ -4,7 +4,7 @@
 #### Temperature Change:
   Annual_Surface_Temperature_Change.csv : https://climatedata.imf.org/datasets/4063314923d74187be9596f10d034914/explore
 #### CO2 data:
-  owid-co2-data.csv : https://github.com/owid/co2-data
+  https://ourworldindata.org/co2
 #### GDP data:
   https://data.worldbank.org/indicator/NY.GDP.MKTP.KD.ZG
   https://data.worldbank.org/indicator/NY.GDP.PCAP.KD.ZG
