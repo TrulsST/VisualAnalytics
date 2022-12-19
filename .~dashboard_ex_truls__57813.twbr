@@ -19,6 +19,7 @@
     <SheetIdentifierTracking />
     <SortTagCleanup />
     <WindowsPersistSimpleIdentifiers />
+    <WorksheetBackgroundTransparency />
     <ZoneBackgroundTransparency />
   </document-format-change-manifest>
   <preferences>
@@ -2188,6 +2189,7 @@
           <alias key='&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]&quot;' value='Temperature Change' />
         </aliases>
       </column>
+      <column datatype='integer' name='[Battery Electric Vehicles sales]' role='measure' type='quantitative' />
       <column caption='Current Year Change' datatype='integer' name='[Calculation_3465801430699122733]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='IF  last() = 0 THEN SUM([Battery Electric Vehicles sales (total)]) END'>
           <table-calc ordering-type='Rows' />
@@ -2241,6 +2243,7 @@
       <column caption='Year (Total)' datatype='date' name='[year (total)]' role='dimension' type='quantitative' />
       <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
       <column-instance column='[annual t co2 emmisions (total)]' derivation='Avg' name='[avg:annual t co2 emmisions (total):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
       <column-instance column='[annual t co2 emmisions]' derivation='Attribute' name='[pcdf:attr:annual t co2 emmisions:qk]' pivot='key' type='quantitative'>
         <table-calc diff-options='Relative' ordering-type='Rows' type='PctDiff'>
           <address>
@@ -2255,6 +2258,7 @@
           </address>
         </table-calc>
       </column-instance>
+      <column-instance column='[Battery Electric Vehicles sales]' derivation='Sum' name='[sum:Battery Electric Vehicles sales:qk]' pivot='key' type='quantitative' />
       <column-instance column='[Green Bonds Issuance (Billion US$) (average)]' derivation='Sum' name='[sum:Green Bonds Issuance (Billion US$) (average):qk]' pivot='key' type='quantitative' />
       <column-instance column='[Green Bonds Issuance (Billion US$)]' derivation='Sum' name='[sum:Green Bonds Issuance (Billion US$):qk]' pivot='key' type='quantitative' />
       <column-instance column='[Temperature Change C (average)]' derivation='Sum' name='[sum:Temperature Change C (average):qk]' pivot='key' type='quantitative' />
@@ -2291,22 +2295,16 @@
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:annual t co2 emmisions:qk]&quot;</bucket>
             </map>
             <map to='#4e79a7'>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_3465801431027220534:qk]&quot;</bucket>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Battery Electric Vehicles sales:qk]&quot;</bucket>
             </map>
             <map to='#4e79a7'>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$):qk]&quot;</bucket>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_3465801431027220534:qk]&quot;</bucket>
             </map>
             <map to='#4e79a7'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:number of fast EV charginpoints:qk]&quot;</bucket>
             </map>
             <map to='#4e79a7'>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]&quot;</bucket>
-            </map>
-            <map to='#4e79a7'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027290167:qk]&quot;</bucket>
-            </map>
-            <map to='#4e79a7'>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027728443:qk]&quot;</bucket>
             </map>
             <map to='#4e79a7'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250167537664:qk]&quot;</bucket>
@@ -2317,8 +2315,20 @@
             <map to='#4e79a7'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250252886032:qk]&quot;</bucket>
             </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250332799037:qk]&quot;</bucket>
+            </map>
+            <map to='#4f6980'>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$):qk]&quot;</bucket>
+            </map>
+            <map to='#4f6980'>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]&quot;</bucket>
+            </map>
             <map to='#4f6980'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:total number of chargingpoints:qk]&quot;</bucket>
+            </map>
+            <map to='#4f6980'>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027728443:qk]&quot;</bucket>
             </map>
             <map to='#59a14f'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:annual co2 emmisions (average):qk]&quot;</bucket>
@@ -2354,13 +2364,7 @@
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_3465801431027384376:qk]&quot;</bucket>
             </map>
             <map to='#f28e2b'>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (average):qk]&quot;</bucket>
-            </map>
-            <map to='#f28e2b'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:number of slow EV charginpoints:qk]&quot;</bucket>
-            </map>
-            <map to='#f28e2b'>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]&quot;</bucket>
             </map>
             <map to='#f28e2b'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027437625:qk]&quot;</bucket>
@@ -2368,11 +2372,139 @@
             <map to='#f28e2b'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027671098:qk]&quot;</bucket>
             </map>
-            <map to='#f28e2b'>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027863613:qk]&quot;</bucket>
+            <map to='#f47942'>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (average):qk]&quot;</bucket>
+            </map>
+            <map to='#f47942'>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]&quot;</bucket>
             </map>
             <map to='#f47942'>
               <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:total number of chargingpoints (average):qk]&quot;</bucket>
+            </map>
+            <map to='#f47942'>
+              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027863613:qk]&quot;</bucket>
+            </map>
+          </encoding>
+          <encoding attr='color' field='[none:country:nk]' palette='color_blind_10_0' type='palette'>
+            <map to='#1170aa'>
+              <bucket>&quot;Belgium&quot;</bucket>
+            </map>
+            <map to='#1170aa'>
+              <bucket>&quot;Estonia&quot;</bucket>
+            </map>
+            <map to='#1170aa'>
+              <bucket>&quot;Lithuania&quot;</bucket>
+            </map>
+            <map to='#1170aa'>
+              <bucket>&quot;Republic of Ireland&quot;</bucket>
+            </map>
+            <map to='#57606c'>
+              <bucket>&quot;Germany&quot;</bucket>
+            </map>
+            <map to='#57606c'>
+              <bucket>&quot;Malta&quot;</bucket>
+            </map>
+            <map to='#57606c'>
+              <bucket>&quot;Poland&quot;</bucket>
+            </map>
+            <map to='#57606c'>
+              <bucket>&quot;Slovakia&quot;</bucket>
+            </map>
+            <map to='#5fa2ce'>
+              <bucket>&quot;Albania&quot;</bucket>
+            </map>
+            <map to='#5fa2ce'>
+              <bucket>&quot;Greece&quot;</bucket>
+            </map>
+            <map to='#5fa2ce'>
+              <bucket>&quot;Moldova&quot;</bucket>
+            </map>
+            <map to='#5fa2ce'>
+              <bucket>&quot;Slovenia&quot;</bucket>
+            </map>
+            <map to='#76b7b2'>
+              <bucket>&quot;Andorra&quot;</bucket>
+            </map>
+            <map to='#7b848f'>
+              <bucket>&quot;Belarus&quot;</bucket>
+            </map>
+            <map to='#7b848f'>
+              <bucket>&quot;Bulgaria&quot;</bucket>
+            </map>
+            <map to='#7b848f'>
+              <bucket>&quot;Portugal&quot;</bucket>
+            </map>
+            <map to='#7b848f'>
+              <bucket>&quot;Sweden&quot;</bucket>
+            </map>
+            <map to='#a3acb9'>
+              <bucket>&quot;France&quot;</bucket>
+            </map>
+            <map to='#a3acb9'>
+              <bucket>&quot;Netherlands&quot;</bucket>
+            </map>
+            <map to='#a3acb9'>
+              <bucket>&quot;Norway&quot;</bucket>
+            </map>
+            <map to='#a3acb9'>
+              <bucket>&quot;Serbia&quot;</bucket>
+            </map>
+            <map to='#a3cce9'>
+              <bucket>&quot;Hungary&quot;</bucket>
+            </map>
+            <map to='#a3cce9'>
+              <bucket>&quot;Italy&quot;</bucket>
+            </map>
+            <map to='#a3cce9'>
+              <bucket>&quot;Switzerland&quot;</bucket>
+            </map>
+            <map to='#c85200'>
+              <bucket>&quot;Austria&quot;</bucket>
+            </map>
+            <map to='#c85200'>
+              <bucket>&quot;Bosnia and Herzegovina&quot;</bucket>
+            </map>
+            <map to='#c85200'>
+              <bucket>&quot;Montenegro&quot;</bucket>
+            </map>
+            <map to='#c85200'>
+              <bucket>&quot;Spain&quot;</bucket>
+            </map>
+            <map to='#c8d0d9'>
+              <bucket>&quot;Iceland&quot;</bucket>
+            </map>
+            <map to='#c8d0d9'>
+              <bucket>&quot;Liechtenstein&quot;</bucket>
+            </map>
+            <map to='#c8d0d9'>
+              <bucket>&quot;United Kingdom&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;Macedonia&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;Croatia&quot;</bucket>
+            </map>
+            <map to='#fc7d0b'>
+              <bucket>&quot;Denmark&quot;</bucket>
+            </map>
+            <map to='#fc7d0b'>
+              <bucket>&quot;Finland&quot;</bucket>
+            </map>
+            <map to='#fc7d0b'>
+              <bucket>&quot;Luxembourg&quot;</bucket>
+            </map>
+            <map to='#fc7d0b'>
+              <bucket>&quot;Romania&quot;</bucket>
+            </map>
+            <map to='#ffbc79'>
+              <bucket>&quot;Czech Republic&quot;</bucket>
+            </map>
+            <map to='#ffbc79'>
+              <bucket>&quot;Latvia&quot;</bucket>
+            </map>
+            <map to='#ffbc79'>
+              <bucket>&quot;Ukraine&quot;</bucket>
             </map>
           </encoding>
         </style-rule>
@@ -2582,7 +2714,7 @@
       <source dashboard='Main' type='sheet' worksheet='Map' />
       <link caption='Filter1' delimiter=',' escape='\' expression='tsl:Main?' include-null='true' multi-select='true' url-escape='true' />
       <command command='tsc:tsl-filter'>
-        <param name='exclude' value='Map,Emmision per Person KPI' />
+        <param name='exclude' value='Map,KPI Emmision per Person' />
         <param name='target' value='Main' />
       </command>
     </action>
@@ -2596,7 +2728,7 @@
     </action>
   </actions>
   <worksheets>
-    <worksheet name='Annual CO2 Emmissions/Person'>
+    <worksheet name='Annual CO2 Emmissions per Person'>
       <table>
         <view>
           <datasources>
@@ -2612,15 +2744,15 @@
             <column datatype='real' name='[annual t co2 emmisions (total)]' role='measure' type='quantitative' />
             <column datatype='real' name='[annual t co2 emmisions]' role='measure' type='quantitative' />
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
-            <column-instance column='[year]' derivation='None' name='[none:year:qk]' pivot='key' type='quantitative' />
             <column caption='Population (Total)' datatype='integer' name='[population (total)]' role='measure' type='quantitative' />
             <column datatype='integer' name='[population]' role='measure' type='quantitative' />
+            <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_3465801431027728443]' derivation='User' name='[usr:Calculation_3465801431027728443:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_3465801431027863613]' derivation='User' name='[usr:Calculation_3465801431027863613:qk]' pivot='key' type='quantitative' />
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
-            <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action1_5A0A1746CEBB45EA8BBE960D9A576A37]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[country]' member='&quot;Germany&quot;' user:ui-action-filter='[Action1_5A0A1746CEBB45EA8BBE960D9A576A37]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
@@ -2629,15 +2761,19 @@
         </view>
         <style>
           <style-rule element='axis'>
-            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027863613:qk]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
             <format attr='display' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027863613:qk]' scope='rows' value='false' />
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027728443:qk]' scope='rows' value='' />
             <format attr='line-pattern-only' value='solid' />
             <format attr='stroke-size' value='0' />
             <format attr='line-visibility' value='off' />
+            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027863613:qk]' field-type='quantitative' fold='true' scope='rows' type='space' />
           </style-rule>
           <style-rule element='cell'>
             <format attr='border-style' scope='cols' value='solid' />
             <format attr='border-width' scope='cols' value='1' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027728443:qk]' value='n#,##0.000&quot; T&quot;;-#,##0.000&quot; T&quot;' />
           </style-rule>
           <style-rule element='dropline'>
             <format attr='line-visibility' value='on' />
@@ -2660,64 +2796,107 @@
           </style-rule>
         </style>
         <panes>
-          <pane id='4' selection-relaxation-option='selection-relaxation-allow'>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Line' />
+            <mark class='Automatic' />
             <encodings>
               <color column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' />
             </encodings>
-            <style>
-              <style-rule element='mark'>
-                <format attr='mark-markers-mode' value='auto' />
-                <format attr='mark-transparency' value='52' />
-              </style-rule>
-            </style>
           </pane>
-          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027728443:qk]'>
+          <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027728443:qk]'>
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Line' />
+            <mark class='Bar' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
             <encodings>
               <color column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' />
             </encodings>
-            <style>
-              <style-rule element='mark'>
-                <format attr='mark-markers-mode' value='auto' />
-                <format attr='mark-transparency' value='255' />
-              </style-rule>
-            </style>
           </pane>
-          <pane id='6' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027863613:qk]'>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027863613:qk]'>
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Line' />
+            <mark class='Automatic' />
             <encodings>
               <color column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' />
             </encodings>
-            <style>
-              <style-rule element='mark'>
-                <format attr='mark-markers-mode' value='auto' />
-                <format attr='mark-transparency' value='132' />
-              </style-rule>
-            </style>
           </pane>
         </panes>
         <rows>([federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027728443:qk] + [federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_3465801431027863613:qk])</rows>
-        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:year:qk]</cols>
+        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:qk]</cols>
       </table>
       <simple-id uuid='{EF792DF5-8F66-4CD6-B6BB-75D0809FE903}' />
+    </worksheet>
+    <worksheet name='Comparison Emissions'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+            <column caption='SUM([annual t co2 emmisions]/[population])' datatype='real' name='[Calculation_4068228250332799037]' role='measure' type='quantitative' user:unnamed='Comparison Emissions'>
+              <calculation class='tableau' formula='SUM([annual t co2 emmisions]/[population])' />
+            </column>
+            <column datatype='real' name='[annual t co2 emmisions]' role='measure' type='quantitative' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
+            <column datatype='integer' name='[population]' role='measure' type='quantitative' />
+            <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_4068228250332799037]' derivation='User' name='[usr:Calculation_4068228250332799037:qk]' pivot='key' type='quantitative' />
+            <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:country:nk]' member='&quot;Andorra&quot;' />
+              <groupfilter function='member' level='[none:country:nk]' member='&quot;Croatia&quot;' />
+              <groupfilter function='member' level='[none:country:nk]' member='&quot;Italy&quot;' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:qk]' scope='cols' value='Year' />
+          </style-rule>
+          <style-rule element='legend'>
+            <format attr='font-weight' value='normal' />
+            <format attr='color' value='#000000' />
+            <format attr='border-width' value='1' />
+            <format attr='border-style' value='dashed' />
+          </style-rule>
+          <style-rule element='legend-title'>
+            <format attr='font-weight' value='bold' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250332799037:qk]</rows>
+        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:qk]</cols>
+      </table>
+      <simple-id uuid='{6C4C89AB-45E4-4F03-AABA-4ED6F418D3CC}' />
     </worksheet>
     <worksheet name='Country Title'>
       <layout-options>
         <title>
           <formatted-text>
-            <run bold='true' fontalignment='1' fontsize='22'>&lt;</run>
-            <run bold='true' fontalignment='1' fontsize='22'>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</run>
-            <run bold='true' fontalignment='1' fontsize='22'>&gt;</run>
+            <run bold='true' fontalignment='1' fontcolor='#59748b' fontsize='22'><![CDATA[<[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]> ]]></run>
+            <run bold='true' fontalignment='1' fontsize='22'>v. </run>
+            <run bold='true' fontalignment='1' fontcolor='#f6844b' fontsize='22'>EEA Average</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -2731,7 +2910,7 @@
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
-            <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[country]' member='&quot;Germany&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -2745,6 +2924,7 @@
         <style>
           <style-rule element='cell'>
             <format attr='width' value='646' />
+            <format attr='height' value='48' />
             <format attr='font-weight' data-class='subtotal' scope='rows' value='bold' />
             <format attr='font-weight' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='bold' />
             <format attr='text-align' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='center' />
@@ -2753,7 +2933,6 @@
             <format attr='font-size' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='22' />
             <format attr='text-decoration' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='none' />
             <format attr='color' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='#333333' />
-            <format attr='height' value='48' />
           </style-rule>
           <style-rule element='header'>
             <format attr='font-weight' data-class='subtotal' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='bold' />
@@ -2766,6 +2945,11 @@
             <format attr='font-size' scope='rows' value='14' />
             <format attr='font-size' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='16' />
             <format attr='color' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='#000000' />
+          </style-rule>
+          <style-rule element='title'>
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='3' />
+            <format attr='border-color' value='#59748b' />
           </style-rule>
         </style>
         <panes>
@@ -2796,7 +2980,7 @@
       </table>
       <simple-id uuid='{A830DC59-9736-4603-AADB-4620A4D79B3E}' />
     </worksheet>
-    <worksheet name='EV Sales'>
+    <worksheet name='EV Charging Points'>
       <table>
         <view>
           <datasources>
@@ -2813,7 +2997,7 @@
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
-            <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[country]' member='&quot;Germany&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -2828,6 +3012,10 @@
           <style-rule element='axis'>
             <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:total number of chargingpoints (average):qk]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
             <format attr='display' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:total number of chargingpoints (average):qk]' scope='rows' value='false' />
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:qk]' scope='cols' value='Year' />
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:total number of chargingpoints:qk]' scope='rows' value='' />
+            <format attr='width' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:total number of chargingpoints:qk]' value='36' />
+            <format attr='width' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:total number of chargingpoints (average):qk]' value='36' />
           </style-rule>
           <style-rule element='header'>
             <format attr='border-width' data-class='total' scope='cols' value='0' />
@@ -2891,73 +3079,14 @@
       </table>
       <simple-id uuid='{BA6ACE91-AE6C-4101-935D-C715C201A006}' />
     </worksheet>
-    <worksheet name='Emmision per Person KPI'>
+    <worksheet name='Green Bond Issuance'>
       <layout-options>
         <title>
           <formatted-text>
-            <run bold='true'>Emmision per Person</run>
+            <run>Amount Green Bond Issued</run>
           </formatted-text>
         </title>
       </layout-options>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
-          </datasources>
-          <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
-            <column caption='Emission/Person' datatype='real' name='[Calculation_4068228250317389882]' role='measure' type='quantitative'>
-              <calculation class='tableau' formula='[annual t co2 emmisions]/[population]' />
-            </column>
-            <column datatype='real' name='[annual t co2 emmisions]' role='measure' type='quantitative' />
-            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
-            <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
-            <column datatype='integer' name='[population]' role='measure' type='quantitative' />
-            <column-instance column='[Calculation_4068228250317389882]' derivation='Sum' name='[sum:Calculation_4068228250317389882:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
-            <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
-          </datasource-dependencies>
-          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
-            <groupfilter count='5' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
-              <groupfilter direction='DESC' expression='SUM([Calculation_4068228250317389882])' function='order' user:ui-marker='order'>
-                <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
-              </groupfilter>
-            </groupfilter>
-          </filter>
-          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='3'>
-            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
-          <shelf-sorts>
-            <shelf-sort-v2 dimension-to-sort='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' shelf='rows' />
-          </shelf-sorts>
-          <slices>
-            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
-            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</column>
-          </slices>
-          <aggregation value='true' />
-        </view>
-        <style>
-          <style-rule element='quick-filter'>
-            <format attr='title' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' value='Choose Year' />
-            <format attr='border-style' value='solid' />
-          </style-rule>
-          <style-rule element='quick-filter-title'>
-            <format attr='text-align' value='center' />
-          </style-rule>
-        </style>
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-        </panes>
-        <rows>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</rows>
-        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]</cols>
-      </table>
-      <simple-id uuid='{85F0BBA4-807E-45FF-A230-C935BA9E3EBE}' />
-    </worksheet>
-    <worksheet name='Green Bond Issuance'>
       <table>
         <view>
           <datasources>
@@ -2974,7 +3103,7 @@
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
-            <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[country]' member='&quot;Germany&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -2989,6 +3118,13 @@
           <style-rule element='axis'>
             <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (average):qk]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
             <format attr='display' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (average):qk]' scope='rows' value='false' />
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$):qk]' scope='rows' value='' />
+            <format attr='width' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$):qk]' value='60' />
+            <format attr='width' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (average):qk]' value='60' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$):qk]' value='c&quot;$ &quot;#,##0.00&quot; B&quot;;-&quot;$ &quot;#,##0.00&quot; B&quot;' />
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (average):qk]' value='c&quot;$ &quot;#,##0.00&quot; B&quot;;-&quot;$ &quot;#,##0.00&quot; B&quot;' />
           </style-rule>
         </style>
         <panes>
@@ -3172,6 +3308,14 @@
             <format attr='stroke-size' scope='rows' value='0' />
             <format attr='line-visibility' scope='rows' value='off' />
           </style-rule>
+          <style-rule element='legend'>
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='3' />
+            <format attr='border-color' value='#000000' />
+          </style-rule>
+          <style-rule element='legend-title'>
+            <format attr='text-align' value='center' />
+          </style-rule>
         </style>
         <panes>
           <pane selection-relaxation-option='selection-relaxation-allow'>
@@ -3195,6 +3339,163 @@
       </table>
       <simple-id uuid='{26A45DD4-9124-484B-8CC5-35E366CE5577}' />
     </worksheet>
+    <worksheet name='KPI Emmision as of Total'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1'>% of Total EEA Emission &lt;</run>
+            <run bold='true' fontalignment='1'>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</run>
+            <run bold='true' fontalignment='1'>&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+            <column caption='Emission/Person' datatype='real' name='[Calculation_4068228250317389882]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[annual t co2 emmisions]/[population]' />
+            </column>
+            <column caption='SUM([annual t co2 emmisions]/[annual t co2 emmisions (total)])' datatype='real' name='[Calculation_4068228250334834750]' role='measure' type='quantitative' user:unnamed='KPI Emmision as of Total'>
+              <calculation class='tableau' formula='SUM([annual t co2 emmisions]/[annual t co2 emmisions (total)])' />
+            </column>
+            <column datatype='real' name='[annual t co2 emmisions (total)]' role='measure' type='quantitative' />
+            <column datatype='real' name='[annual t co2 emmisions]' role='measure' type='quantitative' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
+            <column datatype='integer' name='[population]' role='measure' type='quantitative' />
+            <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_4068228250334834750]' derivation='User' name='[usr:Calculation_4068228250334834750:qk]' pivot='key' type='quantitative' />
+            <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
+            <groupfilter count='5' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
+              <groupfilter direction='DESC' expression='SUM([Calculation_4068228250317389882])' function='order' user:ui-marker='order'>
+                <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='4'>
+            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <shelf-sorts>
+            <shelf-sort-v2 dimension-to-sort='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250334834750:qk]' shelf='rows' />
+          </shelf-sorts>
+          <slices>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250334834750:qk]' scope='cols' value='' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250334834750:qk]' value='p0.00%' />
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' value='Choose Year' />
+            <format attr='border-style' value='solid' />
+          </style-rule>
+          <style-rule element='quick-filter-title'>
+            <format attr='text-align' value='center' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</rows>
+        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250334834750:qk]</cols>
+      </table>
+      <simple-id uuid='{2D1E61B7-7557-40A7-94A6-E8BD742E87A1}' />
+    </worksheet>
+    <worksheet name='KPI Emmision per Person'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1'>Emmision per Person &lt;</run>
+            <run bold='true' fontalignment='1'>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</run>
+            <run bold='true' fontalignment='1'>&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+            <column caption='Emission/Person' datatype='real' name='[Calculation_4068228250317389882]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[annual t co2 emmisions]/[population]' />
+            </column>
+            <column datatype='real' name='[annual t co2 emmisions]' role='measure' type='quantitative' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
+            <column datatype='integer' name='[population]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_4068228250317389882]' derivation='Sum' name='[sum:Calculation_4068228250317389882:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
+            <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
+            <groupfilter count='5' end='top' function='end' units='records' user:ui-marker='end' user:ui-top-by-field='true'>
+              <groupfilter direction='DESC' expression='SUM([Calculation_4068228250317389882])' function='order' user:ui-marker='order'>
+                <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='4'>
+            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <shelf-sorts>
+            <shelf-sort-v2 dimension-to-sort='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' shelf='rows' />
+          </shelf-sorts>
+          <slices>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' scope='cols' value='' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' value='n#,##0.000&quot; T&quot;;-#,##0.000&quot; T&quot;' />
+          </style-rule>
+          <style-rule element='quick-filter'>
+            <format attr='title' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' value='Choose Year' />
+            <format attr='border-style' value='solid' />
+            <format attr='border-width' value='1' />
+            <format attr='font-size' value='9' />
+            <format attr='font-style' value='normal' />
+            <format attr='font-weight' value='bold' />
+          </style-rule>
+          <style-rule element='quick-filter-title'>
+            <format attr='text-align' value='center' />
+            <format attr='font-weight' value='bold' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</rows>
+        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]</cols>
+      </table>
+      <simple-id uuid='{85F0BBA4-807E-45FF-A230-C935BA9E3EBE}' />
+    </worksheet>
     <worksheet name='KPI Temp Offset'>
       <layout-options>
         <title>
@@ -3216,7 +3517,7 @@
             <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
-          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='3'>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='4'>
             <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
@@ -3228,9 +3529,9 @@
           <style-rule element='cell'>
             <format attr='text-align' value='center' />
             <format attr='font-weight' data-class='total' scope='cols' value='normal' />
-            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C (average):qk]' value='*#,##0.00&quot;  C&quot;;-#,##0.00&quot;  C&quot;' />
             <format attr='font-weight' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C (average):qk]' value='bold' />
             <format attr='font-size' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C (average):qk]' value='18' />
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C (average):qk]' value='n#,##0.00&quot; °C&quot;;-#,##0.00&quot; °C&quot;' />
           </style-rule>
           <style-rule element='header'>
             <format attr='border-width' data-class='subtotal' scope='cols' value='0' />
@@ -3262,6 +3563,13 @@
             <format attr='line-pattern-only' scope='cols' value='solid' />
             <format attr='stroke-size' scope='cols' value='0' />
             <format attr='line-visibility' scope='cols' value='off' />
+          </style-rule>
+          <style-rule element='legend'>
+            <format attr='border-style' value='solid' />
+            <format attr='border-color' value='#000000' />
+          </style-rule>
+          <style-rule element='legend-title'>
+            <format attr='text-align' value='center' />
           </style-rule>
         </style>
         <panes>
@@ -3310,26 +3618,57 @@
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
             <column datatype='integer' name='[population]' role='measure' type='quantitative' />
             <column-instance column='[Green Bonds Issuance (Billion US$)]' derivation='Sum' name='[sum:Green Bonds Issuance (Billion US$):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Temperature Change C]' derivation='Sum' name='[sum:Temperature Change C:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
             <column-instance column='[Calculation_4068228250167537664]' derivation='User' name='[usr:Calculation_4068228250167537664:qk]' pivot='key' type='quantitative' />
+            <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='4'>
+            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
+          </slices>
           <aggregation value='true' />
         </view>
         <style>
           <style-rule element='axis'>
-            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Longitude (generated)]' field-type='quantitative' max='6351401.0621162988' min='-3620281.1493143355' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
-            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Latitude (generated)]' field-type='quantitative' max='11979257.914333114' min='2692914.5292358208' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Longitude (generated)]' field-type='quantitative' max='5779216.6837192532' min='-2974084.857226742' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Latitude (generated)]' field-type='quantitative' max='11908970.070906688' min='2473287.1031490909' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='font-weight' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='normal' />
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]' value='n#,##0.00&quot; °C&quot;;-#,##0.00&quot; °C&quot;' />
           </style-rule>
           <style-rule element='header'>
             <format attr='background-color' scope='rows' value='#00000000' />
+            <format attr='border-width' data-class='total' scope='rows' value='0' />
+            <format attr='border-style' data-class='total' scope='rows' value='none' />
+            <format attr='font-weight' data-class='subtotal' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='normal' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='font-size' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='9' />
+            <format attr='font-weight' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='normal' />
+            <format attr='font-style' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='normal' />
           </style-rule>
           <style-rule element='mark'>
             <encoding attr='color' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C:qk]' palette='tableau-map-temperatur' type='interpolated' />
           </style-rule>
           <style-rule element='pane'>
             <format attr='band-color' scope='rows' value='#000000' />
+            <format attr='border-width' data-class='total' scope='rows' value='0' />
+            <format attr='border-style' data-class='total' scope='rows' value='none' />
           </style-rule>
           <style-rule element='table'>
             <format attr='band-size' scope='rows' value='1' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='in-tooltip' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C:qk]' value='false' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='line-pattern-only' scope='rows' value='solid' />
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
           </style-rule>
           <style-rule element='map-layer'>
             <format attr='enabled' id='b01002_001e' value='false' />
@@ -3359,7 +3698,7 @@
           </style-rule>
           <style-rule element='map'>
             <format attr='washout' value='0' />
-            <format attr='map-style' value='dark' />
+            <format attr='map-style' value='light' />
             <format attr='wrap' value='false' />
           </style-rule>
           <style-rule element='map-data-layer'>
@@ -3374,17 +3713,53 @@
             </view>
             <mark class='Automatic' />
             <encodings>
+              <text column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' />
+              <text column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]' />
               <lod column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' />
               <lod column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$):qk]' />
               <lod column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250167537664:qk]' />
               <color column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C:qk]' />
               <geometry column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Geometry (generated)]' />
             </encodings>
+            <customized-tooltip>
+              <formatted-text>
+                <run fontcolor='#787878'>Country: </run>
+                <run bold='true'><![CDATA[<[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Green Bonds Issuance (Billion US$): </run>
+                <run bold='true'><![CDATA[<[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$):qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Temperature Offset: </run>
+                <run bold='true'><![CDATA[<[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]>]]></run>
+                <run>Æ&#10;</run>
+                <run fontcolor='#787878'>Annual Emmision pr. Person: </run>
+                <run bold='true'><![CDATA[<[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250167537664:qk]>]]></run>
+              </formatted-text>
+            </customized-tooltip>
+            <customized-label>
+              <formatted-text>
+                <run>&lt;</run>
+                <run>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</run>
+                <run>&gt;&#10;&lt;</run>
+                <run>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]</run>
+                <run>&gt;&#10;</run>
+              </formatted-text>
+            </customized-label>
             <style>
+              <style-rule element='datalabel'>
+                <format attr='color-mode' value='auto' />
+                <format attr='font-weight' value='bold' />
+                <format attr='font-size' value='8' />
+              </style-rule>
               <style-rule element='mark'>
+                <format attr='mark-labels-range-min' value='true' />
                 <format attr='has-stroke' value='true' />
                 <format attr='has-halo' value='true' />
                 <format attr='halo-color' value='#1b1b1b' />
+                <format attr='mark-labels-show' value='true' />
+                <format attr='mark-labels-cull' value='false' />
+                <format attr='mark-labels-mode' value='range' />
+                <format attr='mark-labels-range-field' value='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]' />
               </style-rule>
             </style>
           </pane>
@@ -3401,24 +3776,18 @@
             <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
           </datasources>
           <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
-            <column caption='Country1' datatype='string' name='[Country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
             <column datatype='string' name='[Name of policy or measure]' role='dimension' type='nominal' />
             <column datatype='string' name='[Objective(s)]' role='dimension' type='nominal' />
             <column datatype='string' name='[Type of policy instrument]' role='dimension' type='nominal' />
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
-            <column-instance column='[Country]' derivation='None' name='[none:Country:nk]' pivot='key' type='nominal' />
             <column-instance column='[Name of policy or measure]' derivation='None' name='[none:Name of policy or measure:nk]' pivot='key' type='nominal' />
             <column-instance column='[Objective(s)]' derivation='None' name='[none:Objective(s):nk]' pivot='key' type='nominal' />
             <column-instance column='[Type of policy instrument]' derivation='None' name='[none:Type of policy instrument:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
-            <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
-          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:Country:nk]'>
-            <groupfilter function='member' level='[none:Country:nk]' member='&quot;Norway&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[country]' member='&quot;Germany&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
-            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:Country:nk]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
           </slices>
           <aggregation value='true' />
@@ -3454,7 +3823,7 @@
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
-            <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action1_5A0A1746CEBB45EA8BBE960D9A576A37]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[country]' member='&quot;Germany&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -3469,9 +3838,21 @@
           <style-rule element='axis'>
             <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]' field-type='quantitative' fold='true' scope='rows' synchronized='true' type='space' />
             <format attr='display' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]' scope='rows' value='false' />
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]' scope='rows' value='' />
+            <format attr='width' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]' value='52' />
+            <format attr='width' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]' value='52' />
           </style-rule>
           <style-rule element='cell'>
             <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]' value='*' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]' value='n#,##0.00&quot; °C&quot;;-#,##0.00&quot; °C&quot;' />
+            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]' value='n#,##0.00&quot; °C&quot;;-#,##0.00&quot; °C&quot;' />
+          </style-rule>
+          <style-rule element='refline'>
+            <format attr='text-format' id='refline0' value='n#,##0.00&quot; °C&quot;;-#,##0.00&quot; °C&quot;' />
+            <format attr='fill-above' id='refline0' value='#00000000' />
+            <format attr='fill-below' id='refline0' value='#f5f5f5' />
           </style-rule>
         </style>
         <panes>
@@ -3483,12 +3864,13 @@
             <encodings>
               <color column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' />
             </encodings>
+            <reference-line axis-column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]' enable-instant-analytics='true' formula='constant' id='refline0' label-type='automatic' scope='per-table' value='1.5' value-column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]' z-order='1' />
           </pane>
           <pane id='1' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C:qk]'>
             <view>
               <breakdown value='auto' />
             </view>
-            <mark class='Automatic' />
+            <mark class='Bar' />
             <encodings>
               <color column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' />
             </encodings>
@@ -3503,8 +3885,8 @@
             </encodings>
             <style>
               <style-rule element='mark'>
-                <format attr='mark-transparency' value='62' />
                 <format attr='mark-markers-mode' value='auto' />
+                <format attr='mark-transparency' value='255' />
               </style-rule>
             </style>
           </pane>
@@ -3516,26 +3898,94 @@
     </worksheet>
   </worksheets>
   <dashboards>
-    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Comparison Dash'>
+    <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Comparisons'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontsize='24'>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+      </layout-options>
       <style />
       <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
-      <zones />
-      <devicelayouts>
-        <devicelayout auto-generated='true' name='Phone'>
-          <size maxheight='700' minheight='700' sizing-mode='vscroll' />
-          <zones>
-            <zone h='100000' id='32' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='31' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000' />
+      <datasources>
+        <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
+      </datasources>
+      <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+        <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+        <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
+      </datasource-dependencies>
+      <zones>
+        <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
+          <zone h='98000' id='10' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='6500' id='11' type-v2='title' w='98400' x='800' y='1000'>
               <zone-style>
                 <format attr='border-color' value='#000000' />
                 <format attr='border-style' value='none' />
                 <format attr='border-width' value='0' />
-                <format attr='margin' value='8' />
+                <format attr='margin' value='4' />
               </zone-style>
             </zone>
-          </zones>
-        </devicelayout>
-      </devicelayouts>
+            <zone h='91500' id='8' type-v2='layout-basic' w='98400' x='800' y='7500'>
+              <zone h='81231' id='5' param='horz' type-v2='layout-flow' w='98400' x='800' y='17769'>
+                <zone h='81231' id='3' type-v2='layout-basic' w='82400' x='800' y='17769'>
+                  <zone h='81231' id='1' name='Comparison Emissions' w='82400' x='800' y='17769'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                </zone>
+                <zone fixed-size='160' h='81231' id='4' is-fixed='true' param='vert' type-v2='layout-flow' w='16000' x='83200' y='17769'>
+                  <zone h='81231' id='6' name='Comparison Emissions' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type-v2='filter' w='16000' x='83200' y='17769'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                </zone>
+              </zone>
+              <zone h='10269' id='7' name='Comparison Emissions' pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type-v2='color' w='82400' x='800' y='7500'>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                  <format attr='background-color' value='#59748b' />
+                </zone-style>
+              </zone>
+              <zone h='10269' id='12' type-v2='dashboard-object' w='16000' x='83200' y='7500'>
+                <button action='tabdoc:goto-sheet window-id=&quot;{94A04FDA-E89F-48B5-A5DF-B5966F1E0F46}&quot;' button-type='text'>
+                  <button-visual-state>
+                    <caption>Back</caption>
+                    <button-caption-font-style fontcolor='#ffffff' fontname='Tableau Bold' fontsize='12' />
+                    <format attr='background-color' value='#333333' />
+                    <format attr='border-style' value='solid' />
+                    <format attr='border-width' value='3' />
+                    <format attr='border-color' value='#000000' />
+                  </button-visual-state>
+                </button>
+                <zone-style>
+                  <format attr='border-color' value='#000000' />
+                  <format attr='border-style' value='none' />
+                  <format attr='border-width' value='0' />
+                  <format attr='margin' value='4' />
+                </zone-style>
+              </zone>
+            </zone>
+          </zone>
+          <zone-style>
+            <format attr='border-color' value='#000000' />
+            <format attr='border-style' value='none' />
+            <format attr='border-width' value='0' />
+            <format attr='margin' value='8' />
+          </zone-style>
+        </zone>
+      </zones>
       <simple-id uuid='{F55B9BC6-CC2F-4428-B6B6-0B089AC8A263}' />
     </dashboard>
     <dashboard _.fcp.AccessibleZoneTabOrder.true...enable-sort-zone-taborder='true' name='Country Insights'>
@@ -3556,7 +4006,7 @@
                               <zone h='90876' id='40' param='horz' type-v2='layout-flow' w='75797' x='800' y='8124'>
                                 <zone h='90876' id='16' param='horz' type-v2='layout-flow' w='75797' x='800' y='8124'>
                                   <zone h='90876' id='5' type-v2='layout-basic' w='75797' x='800' y='8124'>
-                                    <zone h='45438' id='3' name='Annual CO2 Emmissions/Person' w='37900' x='800' y='8124'>
+                                    <zone h='45438' id='3' name='Annual CO2 Emmissions per Person' w='37900' x='800' y='8124'>
                                       <zone-style>
                                         <format attr='border-color' value='#000000' />
                                         <format attr='border-style' value='none' />
@@ -3580,7 +4030,7 @@
                                         <format attr='margin' value='4' />
                                       </zone-style>
                                     </zone>
-                                    <zone h='45438' id='64' name='EV Sales' w='37900' x='38697' y='53562'>
+                                    <zone h='45438' id='64' name='EV Charging Points' w='37900' x='38697' y='53562'>
                                       <zone-style>
                                         <format attr='border-color' value='#000000' />
                                         <format attr='border-style' value='none' />
@@ -3644,8 +4094,8 @@
         <devicelayout auto-generated='true' name='Phone'>
           <size maxheight='1600' minheight='1600' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='70' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='69' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='72' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='71' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='49' h='7124' id='55' is-fixed='true' name='Country Title' w='75799' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -3671,7 +4121,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='45438' id='3' is-fixed='true' name='Annual CO2 Emmissions/Person' w='37900' x='800' y='8124'>
+                <zone fixed-size='280' h='45438' id='3' is-fixed='true' name='Annual CO2 Emmissions per Person' w='37900' x='800' y='8124'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3707,7 +4157,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='45438' id='64' is-fixed='true' name='EV Sales' w='37900' x='38697' y='53562'>
+                <zone fixed-size='280' h='45438' id='64' is-fixed='true' name='EV Charging Points' w='37900' x='38697' y='53562'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3733,7 +4183,7 @@
       <layout-options>
         <title>
           <formatted-text>
-            <run bold='true'>Europe Paris Agreement Monitoring</run>
+            <run bold='true'>European Union - Paris Agreement Monitoring</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -3746,7 +4196,7 @@
           <format attr='font-size' value='24' />
         </style-rule>
       </style>
-      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' />
+      <size maxheight='800' maxwidth='1000' minheight='800' minwidth='1000' preset-index='1' sizing-mode='fixed' />
       <datasources>
         <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
       </datasources>
@@ -3757,7 +4207,7 @@
       <zones>
         <zone h='100000' id='2' type-v2='layout-basic' w='100000' x='0' y='0'>
           <zone h='98000' id='33' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
-            <zone fixed-size='58' h='8250' id='34' is-fixed='true' type-v2='title' w='98400' x='800' y='1000'>
+            <zone fixed-size='78' h='10750' id='34' is-fixed='true' type-v2='title' w='98400' x='800' y='1000'>
               <zone-style>
                 <format attr='border-color' value='#000000' />
                 <format attr='border-style' value='none' />
@@ -3765,11 +4215,11 @@
                 <format attr='margin' value='4' />
               </zone-style>
             </zone>
-            <zone h='89750' id='25' param='horz' type-v2='layout-flow' w='98400' x='800' y='9250'>
-              <zone h='89750' id='23' type-v2='layout-basic' w='98400' x='800' y='9250'>
-                <zone h='74179' id='5' param='horz' type-v2='layout-flow' w='62300' x='800' y='24821'>
-                  <zone h='74179' id='3' type-v2='layout-basic' w='62300' x='800' y='24821'>
-                    <zone h='67555' id='7' name='Map' show-title='false' w='62300' x='800' y='31445'>
+            <zone h='87250' id='25' param='horz' type-v2='layout-flow' w='98400' x='800' y='11750'>
+              <zone h='87250' id='23' type-v2='layout-basic' w='98400' x='800' y='11750'>
+                <zone h='74617' id='5' param='horz' type-v2='layout-flow' w='62298' x='800' y='24383'>
+                  <zone h='74617' id='3' type-v2='layout-basic' w='62298' x='800' y='24383'>
+                    <zone h='67957' id='7' name='Map' show-title='false' w='62298' x='800' y='31043'>
                       <zone-style>
                         <format attr='border-color' value='#000000' />
                         <format attr='border-style' value='none' />
@@ -3777,7 +4227,7 @@
                         <format attr='margin' value='4' />
                       </zone-style>
                     </zone>
-                    <zone h='6624' id='8' name='Map' pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C:qk]' type-v2='color' w='62300' x='800' y='24821'>
+                    <zone h='6660' id='8' name='Map' pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C:qk]' type-v2='color' w='62298' x='800' y='24383'>
                       <zone-style>
                         <format attr='border-color' value='#000000' />
                         <format attr='border-style' value='none' />
@@ -3787,8 +4237,8 @@
                     </zone>
                   </zone>
                 </zone>
-                <zone h='15571' id='10' param='horz' type-v2='layout-flow' w='98400' x='800' y='9250'>
-                  <zone h='15571' id='26' mode='slider' name='Emmision per Person KPI' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type-v2='filter' w='17600' x='800' y='9250'>
+                <zone h='12633' id='10' param='horz' type-v2='layout-flow' w='98400' x='800' y='11750'>
+                  <zone h='12633' id='26' mode='slider' name='KPI Emmision per Person' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type-v2='filter' w='17600' x='800' y='11750'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -3796,8 +4246,8 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='15571' id='27' name='KPI Temp Offset' w='40400' x='18400' y='9250'>
-                    <layout-cache cell-count-w='1' type-h='fixed' type-w='cell' />
+                  <zone fixed-size='314' h='12633' id='27' is-fixed='true' name='KPI Temp Offset' w='32200' x='18400' y='11750'>
+                    <layout-cache type-h='fixed' type-w='cell' />
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -3805,8 +4255,26 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='15571' id='39' name='KPI Emission Reduction' w='40400' x='58800' y='9250'>
-                    <layout-cache cell-count-w='1' type-h='fixed' type-w='cell' />
+                  <zone fixed-size='314' h='12633' id='39' is-fixed='true' name='KPI Emission Reduction' w='32200' x='50600' y='11750'>
+                    <layout-cache type-h='fixed' type-w='cell' />
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='12633' id='43' type-v2='dashboard-object' w='16400' x='82800' y='11750'>
+                    <button action='tabdoc:goto-sheet window-id=&quot;{86396031-4CA5-4F07-9CA9-66F52C704F08}&quot;' button-type='text'>
+                      <button-visual-state>
+                        <caption>Comparisons</caption>
+                        <button-caption-font-style fontcolor='#ffffff' fontname='Tableau Bold' fontsize='12' />
+                        <format attr='background-color' value='#333333' />
+                        <format attr='border-style' value='solid' />
+                        <format attr='border-width' value='2' />
+                        <format attr='border-color' value='#000000' />
+                      </button-visual-state>
+                    </button>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -3815,7 +4283,15 @@
                     </zone-style>
                   </zone>
                 </zone>
-                <zone h='74179' id='22' name='Emmision per Person KPI' w='36100' x='63100' y='24821'>
+                <zone h='27464' id='22' name='KPI Emmision per Person' w='36102' x='63098' y='24383'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                  </zone-style>
+                </zone>
+                <zone h='47153' id='40' name='KPI Emmision as of Total' w='36102' x='63098' y='51847'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3833,21 +4309,22 @@
             <format attr='margin' value='8' />
           </zone-style>
         </zone>
+        <zone h='9625' id='46' is-scaled='1' param='/Users/TrulsMac/Downloads/United-Nations-Logo-1946-present.png' type-v2='bitmap' w='12700' x='1200' y='1500' />
       </zones>
       <devicelayouts>
         <devicelayout auto-generated='true' name='Phone'>
           <layout-options>
             <title>
               <formatted-text>
-                <run bold='true' fontalignment='1'>Europe Paris Agreement Overview</run>
+                <run bold='true'>European Union - Paris Agreement Monitoring</run>
               </formatted-text>
             </title>
           </layout-options>
-          <size maxheight='900' minheight='900' sizing-mode='vscroll' />
+          <size maxheight='1300' minheight='1300' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='38' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='37' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
-                <zone fixed-size='44' h='6500' id='34' type-v2='title' w='98400' x='800' y='1000'>
+            <zone h='100000' id='45' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98770' id='44' param='vert' type-v2='layout-flow' w='96108' x='1946' y='615'>
+                <zone fixed-size='58' h='6040' id='34' type-v2='title' w='96108' x='1946' y='615'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3856,7 +4333,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='90' h='12253' id='27' is-fixed='true' name='KPI Temp Offset' show-title='false' w='78400' x='17600' y='7500'>
+                <zone fixed-size='96' h='8000' id='27' is-fixed='true' name='KPI Temp Offset' w='96108' x='1946' y='6655'>
                   <layout-cache type-h='fixed' type-w='cell' />
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -3866,7 +4343,8 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='12253' id='26' mode='slider' name='Emmision per Person KPI' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' type-v2='filter' w='16800' x='800' y='7500'>
+                <zone fixed-size='96' h='8000' id='39' is-fixed='true' name='KPI Emission Reduction' w='96108' x='1946' y='14655'>
+                  <layout-cache type-h='fixed' type-w='cell' />
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3875,7 +4353,17 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='79247' id='22' is-fixed='true' name='Emmision per Person KPI' w='39300' x='59900' y='19753'>
+                <zone h='4000' id='43' type-v2='dashboard-object' w='96108' x='1946' y='22655'>
+                  <button action='tabdoc:goto-sheet window-id=&quot;{86396031-4CA5-4F07-9CA9-66F52C704F08}&quot;' button-type='text'>
+                    <button-visual-state>
+                      <caption>Comparisons</caption>
+                      <button-caption-font-style fontcolor='#ffffff' fontname='Tableau Bold' fontsize='12' />
+                      <format attr='background-color' value='#333333' />
+                      <format attr='border-style' value='solid' />
+                      <format attr='border-width' value='2' />
+                      <format attr='border-color' value='#000000' />
+                    </button-visual-state>
+                  </button>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3884,7 +4372,7 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='280' h='72169' id='7' is-fixed='true' name='Map' show-title='false' w='59100' x='800' y='26831'>
+                <zone h='6040' id='26' mode='slider' name='KPI Emmision per Person' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type-v2='filter' w='96108' x='1946' y='26655'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3893,7 +4381,34 @@
                     <format attr='padding' value='0' />
                   </zone-style>
                 </zone>
-                <zone h='7078' id='8' name='Map' pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C:qk]' type-v2='color' w='59100' x='800' y='19753'>
+                <zone fixed-size='218' h='17384' id='22' is-fixed='true' name='KPI Emmision per Person' w='96108' x='1946' y='32695'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='22153' id='7' is-fixed='true' name='Map' show-title='false' w='96108' x='1946' y='50079'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone h='5000' id='8' name='Map' pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C:qk]' type-v2='color' w='96108' x='1946' y='72232'>
+                  <zone-style>
+                    <format attr='border-color' value='#000000' />
+                    <format attr='border-style' value='none' />
+                    <format attr='border-width' value='0' />
+                    <format attr='margin' value='4' />
+                    <format attr='padding' value='0' />
+                  </zone-style>
+                </zone>
+                <zone fixed-size='280' h='22153' id='40' is-fixed='true' name='KPI Emmision as of Total' w='96108' x='1946' y='77232'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -3917,7 +4432,61 @@
     </dashboard>
   </dashboards>
   <windows source-height='30'>
-    <window class='worksheet' maximized='true' name='Map'>
+    <window class='dashboard' name='Main'>
+      <viewpoints>
+        <viewpoint name='KPI Emission Reduction'>
+          <zoom type='fit-width' />
+        </viewpoint>
+        <viewpoint name='KPI Emmision as of Total' />
+        <viewpoint name='KPI Emmision per Person' />
+        <viewpoint name='KPI Temp Offset'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Map'>
+          <zoom type='entire-view' />
+          <floating-toolbar-visibility value='2' />
+          <default-map-tool-selection tool='2' />
+          <map-navigation value='1' />
+        </viewpoint>
+      </viewpoints>
+      <active id='27' />
+      <device-preview visible='true'>
+        <device name='Nexus Series' type='Phone' />
+      </device-preview>
+      <simple-id uuid='{94A04FDA-E89F-48B5-A5DF-B5966F1E0F46}' />
+    </window>
+    <window class='dashboard' name='Country Insights'>
+      <viewpoints>
+        <viewpoint name='Annual CO2 Emmissions per Person'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Country Title'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='EV Charging Points'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Green Bond Issuance'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='Policies' />
+        <viewpoint name='Temperature Offset Pre-Industrial'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='-1' />
+      <simple-id uuid='{611DFEB1-A82F-44CB-9BF8-346864767332}' />
+    </window>
+    <window class='dashboard' name='Comparisons'>
+      <viewpoints>
+        <viewpoint name='Comparison Emissions'>
+          <zoom type='entire-view' />
+        </viewpoint>
+      </viewpoints>
+      <active id='1' />
+      <simple-id uuid='{86396031-4CA5-4F07-9CA9-66F52C704F08}' />
+    </window>
+    <window class='worksheet' name='Map'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3933,12 +4502,10 @@
           <strip size='2147483647'>
             <card type='rows' />
           </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
         </edge>
         <edge name='right'>
           <strip size='160'>
+            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type='filter' />
             <card pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Temperature Change C:qk]' type='color' />
           </strip>
         </edge>
@@ -3946,12 +4513,11 @@
       <viewpoint>
         <floating-toolbar-visibility value='2' />
         <default-map-tool-selection tool='2' />
-        <map-navigation value='1' />
         <default-map-unit-selection mapunit='1' />
       </viewpoint>
       <simple-id uuid='{6378BD2A-4E79-4FAC-BB2E-D99CF311FA44}' />
     </window>
-    <window class='worksheet' name='Annual CO2 Emmissions/Person'>
+    <window class='worksheet' name='Annual CO2 Emmissions per Person'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3974,7 +4540,7 @@
         <edge name='right'>
           <strip size='160'>
             <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]' type='filter' />
-            <card pane-specification-id='5' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' type='color' />
+            <card pane-specification-id='1' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' type='color' />
           </strip>
         </edge>
       </cards>
@@ -4060,15 +4626,10 @@
             <card type='title' />
           </strip>
         </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:Country:nk]' type='filter' />
-          </strip>
-        </edge>
       </cards>
       <simple-id uuid='{66B8C93E-F2B9-44C6-B423-0C4DE94CD136}' />
     </window>
-    <window class='worksheet' name='EV Sales'>
+    <window class='worksheet' name='EV Charging Points'>
       <cards>
         <edge name='left'>
           <strip size='242'>
@@ -4097,52 +4658,7 @@
       </cards>
       <simple-id uuid='{68CD53A1-76C2-4CAF-9B18-A889E81B5639}' />
     </window>
-    <window class='dashboard' name='Main'>
-      <viewpoints>
-        <viewpoint name='Emmision per Person KPI' />
-        <viewpoint name='KPI Emission Reduction'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='KPI Temp Offset'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='Map'>
-          <zoom type='entire-view' />
-          <default-map-tool-selection tool='1' />
-        </viewpoint>
-      </viewpoints>
-      <active id='-1' />
-      <device-preview visible='true' />
-      <simple-id uuid='{94A04FDA-E89F-48B5-A5DF-B5966F1E0F46}' />
-    </window>
-    <window class='dashboard' name='Country Insights'>
-      <viewpoints>
-        <viewpoint name='Annual CO2 Emmissions/Person'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='Country Title'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='EV Sales'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='Green Bond Issuance'>
-          <zoom type='entire-view' />
-        </viewpoint>
-        <viewpoint name='Policies' />
-        <viewpoint name='Temperature Offset Pre-Industrial'>
-          <zoom type='entire-view' />
-        </viewpoint>
-      </viewpoints>
-      <active id='10' />
-      <simple-id uuid='{611DFEB1-A82F-44CB-9BF8-346864767332}' />
-    </window>
-    <window class='dashboard' name='Comparison Dash'>
-      <viewpoints />
-      <active id='-1' />
-      <simple-id uuid='{86396031-4CA5-4F07-9CA9-66F52C704F08}' />
-    </window>
-    <window class='worksheet' name='KPI Temp Offset'>
+    <window class='worksheet' maximized='true' name='KPI Temp Offset'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -4194,7 +4710,36 @@
       </cards>
       <simple-id uuid='{30B7C5BD-FE22-4E95-A3BC-E58FB466D8E3}' />
     </window>
-    <window class='worksheet' name='Emmision per Person KPI'>
+    <window class='worksheet' name='KPI Emmision per Person'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='checkdropdown' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='filter' />
+            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{2190A7C6-2ACE-4795-B4C1-FCFDCCECCDD1}' />
+    </window>
+    <window class='worksheet' name='KPI Emmision as of Total'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -4221,7 +4766,7 @@
           </strip>
         </edge>
       </cards>
-      <simple-id uuid='{2190A7C6-2ACE-4795-B4C1-FCFDCCECCDD1}' />
+      <simple-id uuid='{7A24AACB-E916-49C5-9AD0-3E4AC48801FF}' />
     </window>
     <window class='worksheet' name='Country Title'>
       <cards>
@@ -4242,6 +4787,35 @@
         </edge>
       </cards>
       <simple-id uuid='{82FBBDC9-7B05-456F-A7F1-DCDAA2811291}' />
+    </window>
+    <window class='worksheet' name='Comparison Emissions'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='filter' />
+            <card pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{50FC71C1-533B-4440-BFD3-FB355F4B6764}' />
     </window>
   </windows>
 </workbook>
