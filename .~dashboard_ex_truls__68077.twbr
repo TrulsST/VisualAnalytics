@@ -3084,6 +3084,32 @@
       </table>
       <simple-id uuid='{BA6ACE91-AE6C-4101-935D-C715C201A006}' />
     </worksheet>
+    <worksheet name='EV Sales'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+            <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:qk]' pivot='key' type='quantitative' />
+            <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:qk]</cols>
+      </table>
+      <simple-id uuid='{8C7612F8-D464-4673-9732-C8FAA2B7B4CF}' />
+    </worksheet>
     <worksheet name='Green Bond Issuance'>
       <layout-options>
         <title>
@@ -3387,7 +3413,7 @@
             </groupfilter>
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='4'>
-            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[tyr:year:ok]' member='#2017-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <shelf-sorts>
             <shelf-sort-v2 dimension-to-sort='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250334834750:qk]' shelf='rows' />
@@ -3399,6 +3425,9 @@
           <aggregation value='true' />
         </view>
         <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4790493040761319424:qk]' scope='cols' value='' />
+          </style-rule>
           <style-rule element='label'>
             <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4068228250334834750:qk]' value='p0.00%' />
           </style-rule>
@@ -3464,7 +3493,7 @@
             </groupfilter>
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='4'>
-            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[tyr:year:ok]' member='#2017-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <shelf-sorts>
             <shelf-sort-v2 dimension-to-sort='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' direction='DESC' is-on-innermost-dimension='true' measure-to-sort-by='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' shelf='rows' />
@@ -3476,6 +3505,9 @@
           <aggregation value='true' />
         </view>
         <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' scope='cols' value='' />
+          </style-rule>
           <style-rule element='label'>
             <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' value='n#,##0.000&quot; T&quot;;-#,##0.000&quot; T&quot;' />
           </style-rule>
@@ -3533,7 +3565,7 @@
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='4'>
-            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[tyr:year:ok]' member='#2017-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
@@ -3639,7 +3671,7 @@
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='4'>
-            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+            <groupfilter function='member' level='[tyr:year:ok]' member='#2017-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
@@ -4012,14 +4044,14 @@
             <zone h='98000' id='56' type-v2='layout-basic' w='98400' x='800' y='1000'>
               <zone h='90876' id='54' param='horz' type-v2='layout-flow' w='98400' x='800' y='8124'>
                 <zone h='90876' id='52' type-v2='layout-basic' w='98400' x='800' y='8124'>
-                  <zone h='90876' id='50' param='horz' type-v2='layout-flow' w='75797' x='800' y='8124'>
-                    <zone h='90876' id='48' type-v2='layout-basic' w='75797' x='800' y='8124'>
-                      <zone h='90876' id='46' param='horz' type-v2='layout-flow' w='75797' x='800' y='8124'>
-                        <zone h='90876' id='44' type-v2='layout-basic' w='75797' x='800' y='8124'>
-                          <zone h='90876' id='42' param='vert' type-v2='layout-flow' w='75797' x='800' y='8124'>
-                            <zone h='90876' id='40' param='horz' type-v2='layout-flow' w='75797' x='800' y='8124'>
-                              <zone h='90876' id='5' type-v2='layout-basic' w='75797' x='800' y='8124'>
-                                <zone h='45438' id='3' name='Annual CO2 Emmissions per Person' w='37900' x='800' y='8124'>
+                  <zone h='90876' id='50' param='horz' type-v2='layout-flow' w='98400' x='800' y='8124'>
+                    <zone h='90876' id='48' type-v2='layout-basic' w='98400' x='800' y='8124'>
+                      <zone h='90876' id='46' param='horz' type-v2='layout-flow' w='98400' x='800' y='8124'>
+                        <zone h='90876' id='44' type-v2='layout-basic' w='98400' x='800' y='8124'>
+                          <zone h='90876' id='42' param='vert' type-v2='layout-flow' w='98400' x='800' y='8124'>
+                            <zone h='90876' id='40' param='horz' type-v2='layout-flow' w='98400' x='800' y='8124'>
+                              <zone h='90876' id='5' type-v2='layout-basic' w='98400' x='800' y='8124'>
+                                <zone h='45438' id='3' name='Annual CO2 Emmissions per Person' w='49202' x='800' y='8124'>
                                   <zone-style>
                                     <format attr='border-color' value='#000000' />
                                     <format attr='border-style' value='none' />
@@ -4027,7 +4059,7 @@
                                     <format attr='margin' value='4' />
                                   </zone-style>
                                 </zone>
-                                <zone h='45438' id='10' name='Green Bond Issuance' w='37897' x='38700' y='8124'>
+                                <zone h='45438' id='10' name='Green Bond Issuance' w='49198' x='50002' y='8124'>
                                   <zone-style>
                                     <format attr='border-color' value='#000000' />
                                     <format attr='border-style' value='none' />
@@ -4035,7 +4067,7 @@
                                     <format attr='margin' value='4' />
                                   </zone-style>
                                 </zone>
-                                <zone h='45438' id='13' name='Temperature Offset Pre-Industrial' w='37897' x='800' y='53562'>
+                                <zone h='45438' id='13' name='Temperature Offset Pre-Industrial' w='49198' x='800' y='53562'>
                                   <zone-style>
                                     <format attr='border-color' value='#000000' />
                                     <format attr='border-style' value='none' />
@@ -4043,7 +4075,7 @@
                                     <format attr='margin' value='4' />
                                   </zone-style>
                                 </zone>
-                                <zone h='45438' id='64' name='EV Charging Points' w='37900' x='38697' y='53562'>
+                                <zone h='45438' id='64' name='EV Charging Points' w='49202' x='49998' y='53562'>
                                   <zone-style>
                                     <format attr='border-color' value='#000000' />
                                     <format attr='border-style' value='none' />
@@ -4057,14 +4089,6 @@
                         </zone>
                       </zone>
                     </zone>
-                  </zone>
-                  <zone h='90876' id='51' name='Policies' w='22603' x='76597' y='8124'>
-                    <zone-style>
-                      <format attr='border-color' value='#000000' />
-                      <format attr='border-style' value='none' />
-                      <format attr='border-width' value='0' />
-                      <format attr='margin' value='4' />
-                    </zone-style>
                   </zone>
                 </zone>
               </zone>
@@ -4142,15 +4166,6 @@
                   </zone-style>
                 </zone>
                 <zone fixed-size='280' h='45438' id='10' is-fixed='true' name='Green Bond Issuance' w='37897' x='38700' y='8124'>
-                  <zone-style>
-                    <format attr='border-color' value='#000000' />
-                    <format attr='border-style' value='none' />
-                    <format attr='border-width' value='0' />
-                    <format attr='margin' value='4' />
-                    <format attr='padding' value='0' />
-                  </zone-style>
-                </zone>
-                <zone fixed-size='280' h='90876' id='51' is-fixed='true' name='Policies' w='22603' x='76597' y='8124'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -4540,7 +4555,7 @@
       <active id='-1' />
       <simple-id uuid='{D17D18A8-ACB1-4DBC-983D-F83BAD376F70}' />
     </window>
-    <window class='dashboard' maximized='true' name='Main'>
+    <window class='dashboard' name='Main'>
       <viewpoints>
         <viewpoint name='KPI Emission Reduction'>
           <zoom type='fit-width' />
@@ -4557,7 +4572,7 @@
           <map-navigation value='1' />
         </viewpoint>
       </viewpoints>
-      <active id='-1' />
+      <active id='26' />
       <device-preview visible='true'>
         <device name='Nexus Series' type='Phone' />
       </device-preview>
@@ -4577,7 +4592,6 @@
         <viewpoint name='Green Bond Issuance'>
           <zoom type='entire-view' />
         </viewpoint>
-        <viewpoint name='Policies' />
         <viewpoint name='Temperature Offset Pre-Industrial'>
           <zoom type='entire-view' />
         </viewpoint>
@@ -4765,6 +4779,29 @@
         </edge>
       </cards>
       <simple-id uuid='{68CD53A1-76C2-4CAF-9B18-A889E81B5639}' />
+    </window>
+    <window class='worksheet' maximized='true' name='EV Sales'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{53D1C8A0-1B30-4C38-8984-6C825018FE81}' />
     </window>
     <window class='worksheet' name='KPI Temp Offset'>
       <cards>
