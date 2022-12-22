@@ -2188,10 +2188,13 @@
       <column datatype='string' name='[:Measure Names]' role='dimension' type='nominal'>
         <aliases>
           <alias key='&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:annual t co2 emmisions (total):qk]&quot;' value='Average Annual CO2 Emmision' />
+          <alias key='&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:BEV Sales Change:qk]&quot;' value='BEV Sales' />
+          <alias key='&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Change Green Bonds (total):qk]&quot;' value='Green Bond Issued' />
           <alias key='&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:annual t co2 emmisions (total):qk]&quot;' value='Total Annual CO2' />
           <alias key='&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Temperature Change C (average):qk]&quot;' value='Temperature Change' />
         </aliases>
       </column>
+      <column datatype='real' name='[BEV Sales Change]' role='measure' type='quantitative' />
       <column datatype='real' name='[Battery Electric Vehicles sales (average)]' role='measure' type='quantitative' />
       <column datatype='integer' name='[Battery Electric Vehicles sales (total)]' role='measure' type='quantitative' />
       <column datatype='integer' name='[Battery Electric Vehicles sales]' role='measure' type='quantitative' />
@@ -2277,11 +2280,14 @@
       <column caption='Year (Average)' datatype='date' name='[year (average)]' role='dimension' type='quantitative' />
       <column caption='Year (Total)' datatype='date' name='[year (total)]' role='dimension' type='quantitative' />
       <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
+      <column-instance column='[BEV Sales Change]' derivation='Avg' name='[avg:BEV Sales Change:qk]' pivot='key' type='quantitative' />
+      <column-instance column='[Change Green Bonds (total)]' derivation='Avg' name='[avg:Change Green Bonds (total):qk]' pivot='key' type='quantitative' />
       <column-instance column='[annual t co2 emmisions (total)]' derivation='Avg' name='[avg:annual t co2 emmisions (total):qk]' pivot='key' type='quantitative' />
       <column-instance column='[y/y Change in Emmision (%)]' derivation='Avg' name='[avg:y/y Change in Emmision (%):qk]' pivot='key' type='quantitative' />
       <column-instance column='[total number of chargingpoints]' derivation='Sum' name='[cum:sum:total number of chargingpoints:qk]' pivot='key' type='quantitative'>
         <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
       </column-instance>
+      <column-instance column='[Forecast Indicator]' derivation='None' forecast-column-base='[Forecast Indicator]' forecast-column-type='forecast-indicator' name='[none:Forecast Indicator:nk]' pivot='key' type='nominal' />
       <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
       <column-instance column='[annual t co2 emmisions]' derivation='Attribute' name='[pcdf:attr:annual t co2 emmisions:qk]' pivot='key' type='quantitative'>
         <table-calc diff-options='Relative' ordering-type='Rows' type='PctDiff'>
@@ -2326,6 +2332,7 @@
       <column-instance column='[total number of chargingpoints (average)]' derivation='Sum' name='[sum:total number of chargingpoints (average):qk]' pivot='key' type='quantitative' />
       <column-instance column='[total number of chargingpoints]' derivation='Sum' name='[sum:total number of chargingpoints:qk]' pivot='key' type='quantitative' />
       <column-instance column='[y/y Change in Emmision (%)]' derivation='Sum' name='[sum:y/y Change in Emmision (%):qk]' pivot='key' type='quantitative' />
+      <column-instance column='[year (total)]' derivation='Year-Trunc' name='[tyr:year (total):ok]' pivot='key' type='ordinal' />
       <column-instance column='[Calculation_3465801430699122733]' derivation='User' name='[usr:Calculation_3465801430699122733:qk]' pivot='key' type='quantitative'>
         <table-calc ordering-type='Rows' />
       </column-instance>
@@ -2346,6 +2353,11 @@
       <group caption='Action (KPI Policies Title1)' hidden='true' name='[Action (KPI Policies Title1)]' name-style='unqualified' user:auto-column='sheet_link'>
         <groupfilter function='crossjoin'>
           <groupfilter function='level-members' level='[Calculation_5950873632989700116]' />
+        </groupfilter>
+      </group>
+      <group caption='Action (YEAR(Year (Total)))' hidden='true' name='[Action (YEAR(Year (Total)))]' name-style='unqualified' user:auto-column='sheet_link'>
+        <groupfilter function='crossjoin'>
+          <groupfilter function='level-members' level='[tyr:year (total):ok]' />
         </groupfilter>
       </group>
       <mapped-images>
@@ -2723,6 +2735,14 @@
       <semantic-values>
         <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
       </semantic-values>
+      <default-sorts>
+        <manual-sort column='[none:Forecast Indicator:nk]' direction='ASC'>
+          <dictionary>
+            <bucket>&quot;Actual&quot;</bucket>
+            <bucket>&quot;Estimate&quot;</bucket>
+          </dictionary>
+        </manual-sort>
+      </default-sorts>
       <field-sort-info field-sort-order-type='custom-order'>
         <field-sort-custom-order field='F1' />
         <field-sort-custom-order field='country' />
@@ -2984,6 +3004,9 @@
             <column caption='SUM([annual t co2 emmisions (total)]/[Population (Total)])' datatype='real' name='[Calculation_3465801431027863613]' role='measure' type='quantitative' user:unnamed='Annual CO2 Emmissions'>
               <calculation class='tableau' formula='SUM([annual t co2 emmisions (total)]/[population (total)])' />
             </column>
+            <column caption='KPI Policies Title1' datatype='string' name='[Calculation_5950873632989700116]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&quot;Change&quot;' />
+            </column>
             <column datatype='real' name='[annual t co2 emmisions (total)]' role='measure' type='quantitative' />
             <column datatype='real' name='[annual t co2 emmisions]' role='measure' type='quantitative' />
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
@@ -2997,8 +3020,12 @@
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
             <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action1_5A0A1746CEBB45EA8BBE960D9A576A37]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
+            <groupfilter function='member' level='[Calculation_5950873632989700116]' member='&quot;Change&quot;' user:ui-action-filter='[Action3_C8A9770B44AF4B5B8618B632C5C71BD1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -3148,11 +3175,17 @@
             <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
           </datasources>
           <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+            <column caption='KPI Policies Title1' datatype='string' name='[Calculation_5950873632989700116]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&quot;Change&quot;' />
+            </column>
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
             <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
+            <groupfilter function='member' level='[Calculation_5950873632989700116]' member='&quot;Change&quot;' user:ui-action-filter='[Action3_C8A9770B44AF4B5B8618B632C5C71BD1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -3160,6 +3193,7 @@
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -3247,6 +3281,9 @@
             <column caption='sum([Total EV Sales]/[population])' datatype='real' name='[Calculation_5950873632967680002]' role='measure' type='quantitative' user:unnamed='EV Sales pr. Capita'>
               <calculation class='tableau' formula='sum([Calculation_5950873632967487489]/[population])' />
             </column>
+            <column caption='KPI Policies Title1' datatype='string' name='[Calculation_5950873632989700116]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&quot;Change&quot;' />
+            </column>
             <column datatype='real' name='[Plugin Hybrid Vehicles sales (average)]' role='measure' type='quantitative' />
             <column datatype='integer' name='[Plugin Hybrid Vehicles sales]' role='measure' type='quantitative' />
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
@@ -3265,12 +3302,16 @@
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
             <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
+            <groupfilter function='member' level='[Calculation_5950873632989700116]' member='&quot;Change&quot;' user:ui-action-filter='[Action3_C8A9770B44AF4B5B8618B632C5C71BD1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -3386,6 +3427,9 @@
             <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
           </datasources>
           <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+            <column caption='KPI Policies Title1' datatype='string' name='[Calculation_5950873632989700116]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&quot;Change&quot;' />
+            </column>
             <column datatype='real' name='[Green Bonds Issuance (Billion US$) (average)]' role='measure' type='quantitative' />
             <column datatype='real' name='[Green Bonds Issuance (Billion US$)]' role='measure' type='quantitative' />
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
@@ -3398,12 +3442,16 @@
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
             <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
+            <groupfilter function='member' level='[Calculation_5950873632989700116]' member='&quot;Change&quot;' user:ui-action-filter='[Action3_C8A9770B44AF4B5B8618B632C5C71BD1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -3494,8 +3542,10 @@
             <column-instance column='[y/y Change in Emmision (%)]' derivation='Avg' name='[avg:y/y Change in Emmision (%):qk]' pivot='key' type='quantitative' />
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
             <column-instance column='[country]' derivation='None' name='[none:country:nk]' pivot='key' type='nominal' />
+            <column-instance column='[year (total)]' derivation='Year-Trunc' name='[tyr:year (total):ok]' pivot='key' type='ordinal' />
             <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
             <column datatype='real' name='[y/y Change in Emmision (%)]' role='measure' type='quantitative' />
+            <column caption='Year (Total)' datatype='date' name='[year (total)]' role='dimension' type='quantitative' />
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
@@ -3503,6 +3553,9 @@
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
             <groupfilter function='level-members' level='[Calculation_5950873632989700116]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (YEAR(Year (Total)))]'>
+            <groupfilter function='level-members' level='[tyr:year (total):ok]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
@@ -3515,6 +3568,7 @@
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (YEAR(Year (Total)))]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -3643,6 +3697,9 @@
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
             <groupfilter function='level-members' level='[Calculation_5950873632989700116]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (YEAR(Year (Total)))]'>
+            <groupfilter function='level-members' level='[tyr:year (total):ok]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year (total):ok]' kind='hide'>
             <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-manual-selection='true' user:ui-manual-selection-all-when-empty='true' user:ui-marker='enumerate'>
               <groupfilter function='level-members' level='[tyr:year (total):ok]' />
@@ -3664,6 +3721,7 @@
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (YEAR(Year (Total)))]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -3900,97 +3958,11 @@
       </table>
       <simple-id uuid='{85F0BBA4-807E-45FF-A230-C935BA9E3EBE}' />
     </worksheet>
-    <worksheet name='KPI Policies'>
+    <worksheet name='KPI Policies Change'>
       <layout-options>
         <title>
           <formatted-text>
-            <run>Key Policy Metrics</run>
-          </formatted-text>
-        </title>
-      </layout-options>
-      <table>
-        <view>
-          <datasources>
-            <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
-          </datasources>
-          <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
-            <column datatype='real' name='[BEV Sales Change]' role='measure' type='quantitative' />
-            <column caption='KPI Policies Title1' datatype='string' name='[Calculation_5950873632989700116]' role='dimension' type='nominal'>
-              <calculation class='tableau' formula='&quot;Change&quot;' />
-            </column>
-            <column datatype='real' name='[Change Green Bonds (total)]' role='dimension' type='quantitative' />
-            <column-instance column='[BEV Sales Change]' derivation='Avg' name='[avg:BEV Sales Change:qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Change Green Bonds (total)]' derivation='Avg' name='[avg:Change Green Bonds (total):qk]' pivot='key' type='quantitative' />
-            <column-instance column='[Calculation_5950873632989700116]' derivation='None' name='[none:Calculation_5950873632989700116:nk]' pivot='key' type='nominal' />
-            <column-instance column='[Change Green Bonds (total)]' derivation='Sum' name='[sum:Change Green Bonds (total):qk]' pivot='key' type='quantitative' />
-            <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
-            <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
-          </datasource-dependencies>
-          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]'>
-            <groupfilter function='union' user:op='manual'>
-              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:BEV Sales Change:qk]&quot;' />
-              <groupfilter function='member' level='[:Measure Names]' member='&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Change Green Bonds (total):qk]&quot;' />
-            </groupfilter>
-          </filter>
-          <manual-sort column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' direction='ASC'>
-            <dictionary>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:BEV Sales Change:qk]&quot;</bucket>
-              <bucket>&quot;[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Change Green Bonds (total):qk]&quot;</bucket>
-            </dictionary>
-          </manual-sort>
-          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]'>
-            <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-          </filter>
-          <slices>
-            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
-            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]</column>
-          </slices>
-          <aggregation value='true' />
-        </view>
-        <style>
-          <style-rule element='cell'>
-            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Change Green Bonds (total):qk]' value='p0.00%' />
-            <format attr='width' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:Calculation_5950873632989700116:nk]' value='98' />
-            <format attr='height' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' value='46' />
-            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:BEV Sales Change:qk]' value='p0.00%' />
-            <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Change Green Bonds (total):qk]' value='p0.00%' />
-          </style-rule>
-          <style-rule element='worksheet'>
-            <format attr='display-field-labels' scope='cols' value='false' />
-          </style-rule>
-        </style>
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-            <encodings>
-              <text column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Multiple Values]' />
-            </encodings>
-            <style>
-              <style-rule element='mark'>
-                <format attr='mark-labels-show' value='true' />
-              </style-rule>
-              <style-rule element='pane'>
-                <format attr='minwidth' value='-1' />
-                <format attr='maxwidth' value='-1' />
-                <format attr='minheight' value='-1' />
-                <format attr='maxheight' value='-1' />
-              </style-rule>
-            </style>
-          </pane>
-        </panes>
-        <rows>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]</rows>
-        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:Calculation_5950873632989700116:nk]</cols>
-      </table>
-      <simple-id uuid='{6AC9641C-EFF3-4A0D-8901-4B8040DA0304}' />
-    </worksheet>
-    <worksheet name='KPI Policies Trend'>
-      <layout-options>
-        <title>
-          <formatted-text>
-            <run>Key Policy Metrics</run>
+            <run bold='true' fontalignment='2' fontsize='12'>Change</run>
           </formatted-text>
         </title>
       </layout-options>
@@ -4010,7 +3982,9 @@
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
             <column-instance column='[Calculation_5950873632989700116]' derivation='None' name='[none:Calculation_5950873632989700116:nk]' pivot='key' type='nominal' />
             <column-instance column='[Change Green Bonds (total)]' derivation='Sum' name='[sum:Change Green Bonds (total):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[year (total)]' derivation='Year-Trunc' name='[tyr:year (total):ok]' pivot='key' type='ordinal' />
             <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
+            <column caption='Year (Total)' datatype='date' name='[year (total)]' role='dimension' type='quantitative' />
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]'>
@@ -4028,6 +4002,9 @@
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
             <groupfilter function='level-members' level='[country]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (YEAR(Year (Total)))]'>
+            <groupfilter function='level-members' level='[tyr:year (total):ok]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='3'>
             <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
@@ -4035,6 +4012,7 @@
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (YEAR(Year (Total)))]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -4046,9 +4024,51 @@
             <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Multiple Values]' value='*#,##0.00▲;-#,##0.00▼' />
             <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:Change Green Bonds (total):qk]' value='*#,##0.00%▲;-#,##0.00%▼' />
             <format attr='text-format' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[avg:BEV Sales Change:qk]' value='*#,##0.00%▲;-#,##0.00%▼' />
+            <format attr='border-color' scope='rows' value='#c0c0c0' />
+            <format attr='border-width' scope='rows' value='0' />
+            <format attr='border-style' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-width' data-class='subtotal' value='0' />
+            <format attr='border-style' data-class='subtotal' value='none' />
+            <format attr='background-color' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[:Measure Names]' value='#ffffff' />
+            <format attr='band-color' scope='rows' value='#00000000' />
+            <format attr='border-width' scope='rows' value='0' />
+            <format attr='border-style' scope='rows' value='none' />
+            <format attr='border-width' data-class='subtotal' scope='rows' value='0' />
+            <format attr='border-style' data-class='subtotal' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='display' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:Calculation_5950873632989700116:nk]' value='false' />
+            <format attr='font-weight' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:Calculation_5950873632989700116:nk]' value='bold' />
+            <format attr='font-size' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:Calculation_5950873632989700116:nk]' value='12' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='subtotal' value='0' />
+            <format attr='border-style' data-class='subtotal' value='none' />
+            <format attr='band-color' scope='rows' value='#00000000' />
+            <format attr='border-width' scope='rows' value='0' />
+            <format attr='border-style' scope='rows' value='none' />
+            <format attr='border-width' data-class='total' scope='rows' value='0' />
+            <format attr='border-style' data-class='total' scope='rows' value='none' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='band-size' scope='rows' value='1' />
           </style-rule>
           <style-rule element='worksheet'>
             <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='line-visibility' scope='rows' value='on' />
+            <format attr='line-pattern-only' scope='rows' value='solid' />
+            <format attr='stroke-size' scope='rows' value='2' />
+            <format attr='stroke-color' scope='rows' value='#75a1c7' />
+            <format attr='div-level' scope='rows' value='1' />
+          </style-rule>
+          <style-rule element='header-div'>
+            <format attr='line-visibility' scope='rows' value='on' />
+            <format attr='line-pattern-only' scope='rows' value='solid' />
+            <format attr='stroke-size' scope='rows' value='2' />
           </style-rule>
         </style>
         <panes>
@@ -4078,6 +4098,167 @@
       </table>
       <simple-id uuid='{32849511-4A47-41B6-8842-9C3C24941A95}' />
     </worksheet>
+    <worksheet name='KPI Policies Graph'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run bold='true' fontalignment='1' fontsize='12'>Trend</run>
+          </formatted-text>
+        </title>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
+          </datasources>
+          <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+            <column datatype='integer' name='[Battery Electric Vehicles sales (total)]' role='measure' type='quantitative' />
+            <column caption='KPI Policies Title1' datatype='string' name='[Calculation_5950873632989700116]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&quot;Change&quot;' />
+            </column>
+            <column datatype='real' name='[Green Bonds Issuance (Billion US$) (total)]' role='measure' type='quantitative' />
+            <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column-instance column='[Battery Electric Vehicles sales (total)]' derivation='Sum' name='[sum:Battery Electric Vehicles sales (total):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Green Bonds Issuance (Billion US$) (total)]' derivation='Sum' name='[sum:Green Bonds Issuance (Billion US$) (total):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[year (total)]' derivation='Year-Trunc' name='[tyr:year (total):qk]' pivot='key' type='quantitative' />
+            <column caption='Year (Total)' datatype='date' name='[year (total)]' role='dimension' type='quantitative' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
+            <groupfilter function='level-members' level='[country]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
+            <groupfilter function='level-members' level='[Calculation_5950873632989700116]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
+          <slices>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Battery Electric Vehicles sales (total):qk]' scope='rows' value='' />
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (total):qk]' scope='rows' value='' />
+            <format attr='title' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year (total):qk]' scope='cols' value='' />
+            <format attr='display' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Battery Electric Vehicles sales (total):qk]' scope='rows' value='false' />
+            <format attr='display' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (total):qk]' scope='rows' value='false' />
+            <format attr='display' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year (total):qk]' scope='cols' value='false' />
+            <format attr='tick-color' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Battery Electric Vehicles sales (total):qk]' value='#00000000' />
+          </style-rule>
+          <style-rule element='cell'>
+            <format attr='wrap' data-class='subtotal' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Battery Electric Vehicles sales (total):qk]' value='auto' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+            <format attr='band-color' scope='cols' value='#00000000' />
+            <format attr='background-color' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Battery Electric Vehicles sales (total):qk]' value='#ffffff' />
+          </style-rule>
+          <style-rule element='pane'>
+            <format attr='border-width' data-class='total' value='0' />
+            <format attr='border-style' data-class='total' value='none' />
+            <format attr='band-color' scope='cols' value='#00000000' />
+            <format attr='band-color' scope='rows' value='#00000000' />
+          </style-rule>
+          <style-rule element='table'>
+            <format attr='band-size' scope='rows' value='1' />
+            <format attr='band-size' scope='cols' value='1' />
+          </style-rule>
+          <style-rule element='worksheet'>
+            <format attr='display-field-labels' scope='cols' value='false' />
+          </style-rule>
+          <style-rule element='gridline'>
+            <format attr='stroke-size' value='0' />
+          </style-rule>
+          <style-rule element='zeroline'>
+            <format attr='stroke-size' scope='rows' value='0' />
+            <format attr='line-visibility' scope='rows' value='off' />
+          </style-rule>
+          <style-rule element='table-div'>
+            <format attr='stroke-size' scope='cols' value='0' />
+            <format attr='line-visibility' scope='cols' value='off' />
+            <format attr='line-visibility' scope='rows' value='on' />
+            <format attr='line-pattern-only' scope='rows' value='solid' />
+            <format attr='stroke-size' scope='rows' value='2' />
+            <format attr='stroke-color' scope='rows' value='#75a1c7' />
+            <format attr='div-level' scope='rows' value='2' />
+          </style-rule>
+          <style-rule element='header-div'>
+            <format attr='line-visibility' scope='rows' value='on' />
+            <format attr='line-pattern-only' scope='rows' value='solid' />
+            <format attr='stroke-size' scope='rows' value='2' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane id='2' selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='4' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Battery Electric Vehicles sales (total):qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+          <pane id='5' selection-relaxation-option='selection-relaxation-allow' y-axis-name='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (total):qk]'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+              <style-rule element='pane'>
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+                <format attr='minwidth' value='-1' />
+                <format attr='maxwidth' value='-1' />
+                <format attr='minheight' value='-1' />
+                <format attr='maxheight' value='-1' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Battery Electric Vehicles sales (total):qk] + [federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Green Bonds Issuance (Billion US$) (total):qk])</rows>
+        <cols>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year (total):qk]</cols>
+      </table>
+      <simple-id uuid='{6AC9641C-EFF3-4A0D-8901-4B8040DA0304}' />
+    </worksheet>
     <worksheet name='KPI Temp Offset'>
       <layout-options>
         <title>
@@ -4100,7 +4281,9 @@
             <column datatype='real' name='[Temperature Change C]' role='measure' type='quantitative' />
             <column-instance column='[Temperature Change C]' derivation='Avg' name='[avg:Temperature Change C:qk]' pivot='key' type='quantitative' />
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
+            <column-instance column='[year (total)]' derivation='Year-Trunc' name='[tyr:year (total):ok]' pivot='key' type='ordinal' />
             <column-instance column='[year]' derivation='Year-Trunc' name='[tyr:year:ok]' pivot='key' type='ordinal' />
+            <column caption='Year (Total)' datatype='date' name='[year (total)]' role='dimension' type='quantitative' />
             <column caption='Year' datatype='date' name='[year]' role='dimension' type='quantitative' />
           </datasource-dependencies>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
@@ -4109,6 +4292,9 @@
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
             <groupfilter function='level-members' level='[Calculation_5950873632989700116]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (YEAR(Year (Total)))]'>
+            <groupfilter function='level-members' level='[tyr:year (total):ok]' user:ui-action-filter='[Action4_79F0946A59184EE69BF1B203489C00C2]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+          </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' filter-group='3'>
             <groupfilter function='member' level='[tyr:year:ok]' member='#2021-01-01 00:00:00#' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
@@ -4116,6 +4302,7 @@
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (YEAR(Year (Total)))]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -4226,8 +4413,8 @@
         </view>
         <style>
           <style-rule element='axis'>
-            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Longitude (generated)]' field-type='quantitative' max='4616699.3486230262' min='-2835014.8512150617' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
-            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Latitude (generated)]' field-type='quantitative' max='11868737.207774444' min='2960045.758108892' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
+            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Longitude (generated)]' field-type='quantitative' max='5358697.7350224061' min='-3527659.0897552371' projection='EPSG:3857' range-type='fixed' scope='cols' type='space' />
+            <encoding attr='space' class='0' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Latitude (generated)]' field-type='quantitative' max='11729466.665160168' min='3986468.4408430196' projection='EPSG:3857' range-type='fixed' scope='rows' type='space' />
           </style-rule>
           <style-rule element='cell'>
             <format attr='font-weight' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='normal' />
@@ -4245,7 +4432,7 @@
             <format attr='font-style' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' value='normal' />
           </style-rule>
           <style-rule element='mark'>
-            <encoding attr='color' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:y/y Change in Emmision (%):qk]' palette='blue_teal_10_0' type='interpolated' />
+            <encoding attr='color' field='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:y/y Change in Emmision (%):qk]' max='0.1512994118285147' min='-0.35191595069017989' num-steps='5' palette='blue_teal_10_0' type='interpolated' />
           </style-rule>
           <style-rule element='pane'>
             <format attr='band-color' scope='rows' value='#000000' />
@@ -4285,9 +4472,21 @@
             <format attr='enabled' id='dp05_0053e' value='false' />
             <format attr='enabled' id='dp05_0066e' value='false' />
             <format attr='enabled' id='dp05_0077e' value='false' />
+            <format attr='enabled' id='marine-label-sm-ln' value='true' />
+            <format attr='enabled' id='marine-label-sm-pt' value='true' />
+            <format attr='enabled' id='marine-label-md-ln' value='true' />
+            <format attr='enabled' id='marine-label-md-pt' value='true' />
+            <format attr='enabled' id='marine-label-lg-ln' value='true' />
+            <format attr='enabled' id='marine-label-lg-pt' value='true' />
+            <format attr='enabled' id='water-label' value='true' />
+            <format attr='enabled' id='admin-0-label-5th-tier' value='false' />
+            <format attr='enabled' id='admin-0-label-4th-tier' value='false' />
+            <format attr='enabled' id='admin-0-label-3rd-tier' value='false' />
+            <format attr='enabled' id='admin-0-label-2nd-tier' value='false' />
+            <format attr='enabled' id='admin-0-label-1st-tier' value='false' />
           </style-rule>
           <style-rule element='map'>
-            <format attr='washout' value='0' />
+            <format attr='washout' value='0.70999997854232788' />
             <format attr='map-style' value='light' />
             <format attr='wrap' value='false' />
           </style-rule>
@@ -4399,33 +4598,6 @@
       </table>
       <simple-id uuid='{62CB899E-DFDD-4258-BD25-5D214AD765B4}' />
     </worksheet>
-    <worksheet name='Sheet 16'>
-      <table>
-        <view>
-          <datasources />
-          <mapsources>
-            <mapsource name='Tableau' />
-          </mapsources>
-          <aggregation value='true' />
-        </view>
-        <style>
-          <style-rule element='map'>
-            <format attr='washout' value='0.0' />
-          </style-rule>
-        </style>
-        <panes>
-          <pane selection-relaxation-option='selection-relaxation-allow'>
-            <view>
-              <breakdown value='auto' />
-            </view>
-            <mark class='Automatic' />
-          </pane>
-        </panes>
-        <rows />
-        <cols />
-      </table>
-      <simple-id uuid='{AADF1330-7059-48D4-AE1C-7FFD13D24AAD}' />
-    </worksheet>
     <worksheet name='Temperature Offset Pre-Industrial'>
       <table>
         <view>
@@ -4433,6 +4605,9 @@
             <datasource caption='Sheet1 (main)' name='federated.0nj62wd1m3o8y01ahqfl50irojdh' />
           </datasources>
           <datasource-dependencies datasource='federated.0nj62wd1m3o8y01ahqfl50irojdh'>
+            <column caption='KPI Policies Title1' datatype='string' name='[Calculation_5950873632989700116]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='&quot;Change&quot;' />
+            </column>
             <column datatype='real' name='[Temperature Change C (average)]' role='measure' type='quantitative' />
             <column datatype='real' name='[Temperature Change C]' role='measure' type='quantitative' />
             <column caption='Country' datatype='string' name='[country]' role='dimension' semantic-role='[Country].[ISO3166_2]' type='nominal' />
@@ -4445,12 +4620,16 @@
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]'>
             <groupfilter function='member' level='[country]' member='&quot;Norway&quot;' user:ui-action-filter='[Action2_8BF12BBB9D9147ACA9A6F0912E60B751]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
           </filter>
+          <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]'>
+            <groupfilter function='member' level='[Calculation_5950873632989700116]' member='&quot;Change&quot;' user:ui-action-filter='[Action3_C8A9770B44AF4B5B8618B632C5C71BD1]' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <filter class='categorical' column='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]'>
             <groupfilter function='level-members' level='[none:country:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
           </filter>
           <slices>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]</column>
             <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]</column>
+            <column>[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (KPI Policies Title1)]</column>
           </slices>
           <aggregation value='true' />
         </view>
@@ -4843,7 +5022,7 @@
                       </zone>
                     </zone>
                   </zone>
-                  <zone h='35616' id='22' name='KPI Emmision per Person' w='36103' x='63097' y='24382'>
+                  <zone h='42500' id='22' name='KPI Emmision per Person' w='36103' x='63097' y='56500'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -4904,7 +5083,26 @@
                       <format attr='margin' value='4' />
                     </zone-style>
                   </zone>
-                  <zone h='39002' id='66' name='KPI Policies Trend' w='36103' x='63097' y='59998'>
+                  <zone h='24743' id='66' name='KPI Policies Change' w='18052' x='63097' y='31757'>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone forceUpdate='true' h='7375' id='70' type-v2='text' w='36103' x='63097' y='24382'>
+                    <formatted-text>
+                      <run bold='true' fontalignment='1' fontcolor='#000000' fontsize='16'>Key Policy Metrics</run>
+                    </formatted-text>
+                    <zone-style>
+                      <format attr='border-color' value='#000000' />
+                      <format attr='border-style' value='none' />
+                      <format attr='border-width' value='0' />
+                      <format attr='margin' value='4' />
+                    </zone-style>
+                  </zone>
+                  <zone h='24743' id='71' name='KPI Policies Graph' w='18051' x='81149' y='31757'>
                     <zone-style>
                       <format attr='border-color' value='#000000' />
                       <format attr='border-style' value='none' />
@@ -5198,13 +5396,13 @@
       <simple-id uuid='{E4DC0B00-5945-4D9D-845E-9A89612A6582}' />
     </dashboard>
   </dashboards>
-  <windows source-height='30'>
+  <windows film-mode='true' source-height='30'>
     <window class='dashboard' name='Meet the Team'>
       <viewpoints />
       <active id='3' />
       <simple-id uuid='{D17D18A8-ACB1-4DBC-983D-F83BAD376F70}' />
     </window>
-    <window class='dashboard' name='Main'>
+    <window class='dashboard' maximized='true' name='Main'>
       <viewpoints>
         <viewpoint name='KPI Change in Emission'>
           <zoom type='entire-view' />
@@ -5215,7 +5413,10 @@
         <viewpoint name='KPI Emmision per Person'>
           <zoom type='entire-view' />
         </viewpoint>
-        <viewpoint name='KPI Policies Trend'>
+        <viewpoint name='KPI Policies Change'>
+          <zoom type='entire-view' />
+        </viewpoint>
+        <viewpoint name='KPI Policies Graph'>
           <zoom type='entire-view' />
         </viewpoint>
         <viewpoint name='KPI Temp Offset'>
@@ -5228,13 +5429,13 @@
           <map-navigation value='1' />
         </viewpoint>
       </viewpoints>
-      <active id='7' />
+      <active id='-1' />
       <device-preview visible='true'>
         <device name='Nexus Series' type='Phone' />
       </device-preview>
       <simple-id uuid='{94A04FDA-E89F-48B5-A5DF-B5966F1E0F46}' />
     </window>
-    <window class='dashboard' maximized='true' name='Country Insights'>
+    <window class='dashboard' name='Country Insights'>
       <viewpoints>
         <viewpoint name='Annual CO2 Emmissions per Person'>
           <zoom type='entire-view' />
@@ -5252,7 +5453,7 @@
           <zoom type='entire-view' />
         </viewpoint>
       </viewpoints>
-      <active id='59' />
+      <active id='-1' />
       <simple-id uuid='{611DFEB1-A82F-44CB-9BF8-346864767332}' />
     </window>
     <window class='dashboard' name='Comparisons'>
@@ -5264,7 +5465,7 @@
       <active id='12' />
       <simple-id uuid='{86396031-4CA5-4F07-9CA9-66F52C704F08}' />
     </window>
-    <window class='worksheet' name='Map'>
+    <window class='worksheet' name='Map' tab-color='#4f779a'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5295,7 +5496,201 @@
       </viewpoint>
       <simple-id uuid='{6378BD2A-4E79-4FAC-BB2E-D99CF311FA44}' />
     </window>
-    <window class='worksheet' name='Annual CO2 Emmissions per Person'>
+    <window class='worksheet' name='KPI Policies Graph' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{EB7C0F42-977A-4C96-A300-E05C0D10B53D}' />
+    </window>
+    <window class='worksheet' name='KPI Policies Change' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{E999321F-F8A9-4828-87DB-100593846005}' />
+    </window>
+    <window class='worksheet' name='KPI Temp Offset' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]' type='filter' />
+            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{BDBC0D74-CBDD-446E-AB5F-13C95993BAC3}' />
+    </window>
+    <window class='worksheet' name='KPI Emission Reduction' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card type='measures' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{30B7C5BD-FE22-4E95-A3BC-E58FB466D8E3}' />
+    </window>
+    <window class='worksheet' name='KPI Change in Emission' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' type='filter' />
+            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='filter' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{523925E9-7E66-4DC3-97B6-9276C46B1036}' />
+    </window>
+    <window class='worksheet' name='KPI Emmision per Person' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='checkdropdown' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='filter' />
+            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type='filter' />
+            <card pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{2190A7C6-2ACE-4795-B4C1-FCFDCCECCDD1}' />
+    </window>
+    <window class='worksheet' name='KPI Emmision as of Total' tab-color='#4f779a'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='filter' />
+            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type='filter' />
+            <card pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4790493040761319424:qk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{7A24AACB-E916-49C5-9AD0-3E4AC48801FF}' />
+    </window>
+    <window class='worksheet' name='Annual CO2 Emmissions per Person' tab-color='#a65200'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5327,7 +5722,7 @@
       </viewpoint>
       <simple-id uuid='{F5562C08-A3FC-42CC-B588-DBCA5DAD48A7}' />
     </window>
-    <window class='worksheet' name='Green Bond Issuance'>
+    <window class='worksheet' name='Green Bond Issuance' tab-color='#a65200'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5356,7 +5751,7 @@
       </cards>
       <simple-id uuid='{7E3066FE-A6F0-4EB9-8974-1D8F27B3C0FE}' />
     </window>
-    <window class='worksheet' name='Temperature Offset Pre-Industrial'>
+    <window class='worksheet' name='Temperature Offset Pre-Industrial' tab-color='#a65200'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5384,7 +5779,7 @@
       </cards>
       <simple-id uuid='{338CFBAA-C8A3-45E7-9A1F-C70224234926}' />
     </window>
-    <window class='worksheet' name='Policies'>
+    <window class='worksheet' name='Policies' tab-color='#a65200'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5407,7 +5802,7 @@
       </cards>
       <simple-id uuid='{66B8C93E-F2B9-44C6-B423-0C4DE94CD136}' />
     </window>
-    <window class='worksheet' name='EV Sales pr. Capita'>
+    <window class='worksheet' name='EV Sales pr. Capita' tab-color='#a65200'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5436,207 +5831,7 @@
       </cards>
       <simple-id uuid='{53D1C8A0-1B30-4C38-8984-6C825018FE81}' />
     </window>
-    <window class='worksheet' name='KPI Policies'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-            <card type='measures' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' type='filter' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{EB7C0F42-977A-4C96-A300-E05C0D10B53D}' />
-    </window>
-    <window class='worksheet' name='KPI Policies Trend'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-            <card type='measures' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' type='filter' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{E999321F-F8A9-4828-87DB-100593846005}' />
-    </window>
-    <window class='worksheet' name='KPI Temp Offset'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[Action (Country)]' type='filter' />
-            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' type='filter' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{BDBC0D74-CBDD-446E-AB5F-13C95993BAC3}' />
-    </window>
-    <window class='worksheet' name='KPI Emission Reduction'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-            <card type='measures' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{30B7C5BD-FE22-4E95-A3BC-E58FB466D8E3}' />
-    </window>
-    <window class='worksheet' name='KPI Change in Emission'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' type='filter' />
-            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='filter' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{523925E9-7E66-4DC3-97B6-9276C46B1036}' />
-    </window>
-    <window class='worksheet' name='KPI Emmision as of Total'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='filter' />
-            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type='filter' />
-            <card pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[usr:Calculation_4790493040761319424:qk]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{7A24AACB-E916-49C5-9AD0-3E4AC48801FF}' />
-    </window>
-    <window class='worksheet' name='KPI Emmision per Person'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-        <edge name='right'>
-          <strip size='160'>
-            <card mode='checkdropdown' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[none:country:nk]' type='filter' />
-            <card mode='radiolist' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[tyr:year:ok]' show-all='false' type='filter' />
-            <card pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:Calculation_4068228250317389882:qk]' type='color' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{2190A7C6-2ACE-4795-B4C1-FCFDCCECCDD1}' />
-    </window>
-    <window class='worksheet' name='Country Title'>
+    <window class='worksheet' name='Country Title' tab-color='#a65200'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5656,7 +5851,7 @@
       </cards>
       <simple-id uuid='{82FBBDC9-7B05-456F-A7F1-DCDAA2811291}' />
     </window>
-    <window class='worksheet' name='Comparison Emissions'>
+    <window class='worksheet' name='Comparison Emissions' tab-color='#17927d'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -5684,29 +5879,6 @@
         </edge>
       </cards>
       <simple-id uuid='{50FC71C1-533B-4440-BFD3-FB355F4B6764}' />
-    </window>
-    <window class='worksheet' name='Sheet 16'>
-      <cards>
-        <edge name='left'>
-          <strip size='160'>
-            <card type='pages' />
-            <card type='filters' />
-            <card type='marks' />
-          </strip>
-        </edge>
-        <edge name='top'>
-          <strip size='2147483647'>
-            <card type='columns' />
-          </strip>
-          <strip size='2147483647'>
-            <card type='rows' />
-          </strip>
-          <strip size='31'>
-            <card type='title' />
-          </strip>
-        </edge>
-      </cards>
-      <simple-id uuid='{1A6185C9-1367-47F9-84AB-A73822252409}' />
     </window>
   </windows>
 </workbook>
