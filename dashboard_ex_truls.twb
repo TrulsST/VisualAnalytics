@@ -5092,8 +5092,8 @@ The long term temperature goal for EU countries is set at not higher than 1.5 de
           </layout-options>
           <size maxheight='2000' minheight='2000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='190' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='189' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='192' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='191' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='75' h='9375' id='84' is-fixed='true' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/istockphoto-180423990-170667a.jpg' type-v2='bitmap' w='12400' x='300' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -5446,8 +5446,8 @@ The long term temperature goal for EU countries is set at not higher than 1.5 de
           </layout-options>
           <size maxheight='1900' minheight='1900' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='190' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='189' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='192' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='191' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='76' h='9500' id='34' type-v2='title' w='98400' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -5708,8 +5708,8 @@ The long term temperature goal for EU countries is set at not higher than 1.5 de
           </layout-options>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='85' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='84' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='87' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='86' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone h='9375' id='11' type-v2='title' w='98400' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
