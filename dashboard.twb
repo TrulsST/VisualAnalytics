@@ -4688,7 +4688,7 @@ For further information about the dashboard see the report.</run>
             <format attr='margin' value='8' />
           </zone-style>
         </zone>
-        <zone h='9375' id='84' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/istockphoto-180423990-170667a.jpg' type-v2='bitmap' w='12400' x='300' y='1000' />
+        <zone forceUpdate='true' h='9375' id='84' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/data/EU_flag.jpg' type-v2='bitmap' w='12400' x='300' y='1000' />
         <zone h='14875' id='90' layout-strategy-id='distribute-evenly' param='horz' type-v2='layout-flow' w='64900' x='700' y='10625'>
           <zone h='14875' id='170' name='KPI Emission Change - 1990 Insights' show-caption='true' show-title='false' w='21700' x='700' y='10625'>
             <zone-style>
@@ -4761,9 +4761,9 @@ For further information about the dashboard see the report.</run>
           </layout-options>
           <size maxheight='2000' minheight='2000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='208' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='207' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
-                <zone fixed-size='75' h='9375' id='84' is-fixed='true' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/istockphoto-180423990-170667a.jpg' type-v2='bitmap' w='12400' x='300' y='1000'>
+            <zone h='100000' id='211' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='210' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+                <zone fixed-size='75' forceUpdate='true' h='9375' id='84' is-fixed='true' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/data/EU_flag.jpg' type-v2='bitmap' w='12400' x='300' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -5001,7 +5001,7 @@ For further information about the dashboard see the report.</run>
             <format attr='margin' value='8' />
           </zone-style>
         </zone>
-        <zone h='9375' id='84' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/istockphoto-180423990-170667a.jpg' type-v2='bitmap' w='12400' x='300' y='1000' />
+        <zone h='9375' id='84' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/data/EU_flag.jpg' type-v2='bitmap' w='12400' x='300' y='1000' />
         <zone h='4000' id='8' name='Map' pane-specification-id='0' param='[federated.0nj62wd1m3o8y01ahqfl50irojdh].[sum:y/y Change in Emmision (%):qk]' show-title='false' type-v2='color' w='23000' x='1200' y='26250' />
         <zone h='14875' id='90' layout-strategy-id='distribute-evenly' param='horz' type-v2='layout-flow' w='64900' x='700' y='10625'>
           <zone fixed-size='202' h='14875' id='93' is-fixed='true' name='KPI Emission Change - 1990' show-caption='true' show-title='false' w='21700' x='700' y='10625'>
@@ -5120,8 +5120,8 @@ For further information about the dashboard see the report.</run>
           </layout-options>
           <size maxheight='1950' minheight='1950' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='209' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='208' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='212' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='211' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='76' h='9500' id='34' type-v2='title' w='98400' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -5132,7 +5132,7 @@ For further information about the dashboard see the report.</run>
                     <format attr='background-color' value='#dfe7e8' />
                   </zone-style>
                 </zone>
-                <zone fixed-size='75' h='9375' id='84' is-fixed='true' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/istockphoto-180423990-170667a.jpg' type-v2='bitmap' w='12400' x='300' y='1000'>
+                <zone fixed-size='75' h='9375' id='84' is-fixed='true' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/data/EU_flag.jpg' type-v2='bitmap' w='12400' x='300' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
                     <format attr='border-style' value='none' />
@@ -5394,8 +5394,8 @@ For further information about the dashboard see the report.</run>
           </layout-options>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='103' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='84000' id='102' param='vert' type-v2='layout-flow' w='84000' x='8000' y='8000'>
+            <zone h='100000' id='105' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='104' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone h='9375' id='11' type-v2='title' w='98400' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
