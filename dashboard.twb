@@ -179,7 +179,7 @@
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
             <attributes>
-              <attribute datatype='integer' name='context'>6</attribute>
+              <attribute datatype='integer' name='context'>2</attribute>
               <attribute datatype='string' name='gridOrigin'>&quot;A1:K33:no:A1:K33:0&quot;</attribute>
               <attribute datatype='boolean' name='header'>true</attribute>
               <attribute datatype='integer' name='outcome'>2</attribute>
@@ -4761,8 +4761,8 @@ For further information about the dashboard see the report.</run>
           </layout-options>
           <size maxheight='2000' minheight='2000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='206' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='205' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='208' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='207' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='75' h='9375' id='84' is-fixed='true' is-scaled='1' param='/Users/TrulsMac/Documents/GitHub/VisualAnalyticsExam/istockphoto-180423990-170667a.jpg' type-v2='bitmap' w='12400' x='300' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -5120,8 +5120,8 @@ For further information about the dashboard see the report.</run>
           </layout-options>
           <size maxheight='1950' minheight='1950' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='207' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='206' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='209' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='98000' id='208' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
                 <zone fixed-size='76' h='9500' id='34' type-v2='title' w='98400' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -5394,8 +5394,8 @@ For further information about the dashboard see the report.</run>
           </layout-options>
           <size maxheight='1000' minheight='1000' sizing-mode='vscroll' />
           <zones>
-            <zone h='100000' id='101' type-v2='layout-basic' w='100000' x='0' y='0'>
-              <zone h='98000' id='100' param='vert' type-v2='layout-flow' w='98400' x='800' y='1000'>
+            <zone h='100000' id='103' type-v2='layout-basic' w='100000' x='0' y='0'>
+              <zone h='84000' id='102' param='vert' type-v2='layout-flow' w='84000' x='8000' y='8000'>
                 <zone h='9375' id='11' type-v2='title' w='98400' x='800' y='1000'>
                   <zone-style>
                     <format attr='border-color' value='#000000' />
@@ -5468,7 +5468,7 @@ For further information about the dashboard see the report.</run>
       <active id='-1' />
       <simple-id uuid='{D17D18A8-ACB1-4DBC-983D-F83BAD376F70}' />
     </window>
-    <window class='dashboard' maximized='true' name='Main'>
+    <window class='dashboard' name='Main'>
       <viewpoints>
         <viewpoint name='Emission Change'>
           <zoom type='entire-view' />
@@ -5519,7 +5519,7 @@ For further information about the dashboard see the report.</run>
       </device-preview>
       <simple-id uuid='{9D7D4128-4F70-4076-AF92-47DC61853E6F}' />
     </window>
-    <window class='dashboard' name='Country Insights'>
+    <window class='dashboard' maximized='true' name='Country Insights'>
       <viewpoints>
         <viewpoint name='Annual CO2 Emmissions per Person'>
           <zoom type='entire-view' />
